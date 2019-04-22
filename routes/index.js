@@ -7,12 +7,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: app_name });
 });
 router.get('/xem-chi-tiet/', function(req, res, next) {
-  res.render('xem-chi-tiet', { title: 'Xem chi tiet' });
+  res.render('xem-chi-tiet', { title: 'EleFind-Xem chi tiết' });
 });
 router.get('/danh-sach-san-pham-theo-loai/', function(req, res, next) {
-  res.render('danh-sach-san-pham-theo-loai', { title:'EleFind - Đăng ký tài khoản' });
+  res.render('danh-sach-san-pham-theo-loai', { title:'EleFind - Danh sách sản phẩm' });
 });
-
+router.get('/tim-kiem/', function(req, res, next) {
+  res.render('search', { title: 'EleFind-Tìm kiếm' });
+});
 router.get('/dang-ky/', function(req, res, next) {
   res.render('signup', { title:'EleFind - Đăng ký tài khoản' });
 });
