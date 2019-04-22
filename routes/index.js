@@ -7,9 +7,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: app_name });
 });
 router.get('/xem-chi-tiet/', function(req, res, next) {
-  res.render('xem-chi-tiet', { title: app_name });
+  res.render('xem-chi-tiet', { title: 'Xem chi tiet' });
 });
-
+router.get('/danh-sach-san-pham-theo-loai/', function(req, res, next) {
+  res.render('danh-sach-san-pham-theo-loai', { title:'Danh sach san pham' });
+});
 
 router.get('/dang-ky/', function(req, res, next) {
   res.render('signup', { title:'EleFind - Đăng ký tài khoản' });
