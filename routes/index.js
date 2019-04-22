@@ -29,4 +29,9 @@ router.get('/cap-nhat-tai-khoan/', function(req, res, next) {
 router.get('/cntk/', function(req, res, next) {
   res.render('updateinfo', { title:'EleFind - Cập nhật tài khoản' });
 });
+
+router.get('/quen-mat-khau/', function(req, res, next) {
+  res.render('forgotpassword', { title:'EleFind - Lấy lại mật khẩu' });
+});
+
 module.exports = router;
