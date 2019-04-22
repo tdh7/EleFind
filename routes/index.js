@@ -10,7 +10,7 @@ router.get('/xem-chi-tiet/', function(req, res, next) {
   res.render('xem-chi-tiet', { title: 'Xem chi tiet' });
 });
 router.get('/danh-sach-san-pham-theo-loai/', function(req, res, next) {
-  res.render('danh-sach-san-pham-theo-loai', { title:'Danh sach san pham' });
+  res.render('danh-sach-san-pham-theo-loai', { title:'EleFind - Đăng ký tài khoản' });
 });
 
 router.get('/dang-ky/', function(req, res, next) {
