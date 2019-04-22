@@ -15,6 +15,9 @@ router.get('/danh-sach-san-pham-theo-loai/', function(req, res, next) {
 router.get('/tim-kiem/', function(req, res, next) {
   res.render('search', { title: 'EleFind-Tìm kiếm' });
 });
+router.get('/test/', function(req, res, next) {
+  res.render('store', { title:'EleFind - test' });
+});
 router.get('/dang-ky/', function(req, res, next) {
   res.render('signup', { title:'EleFind - Đăng ký tài khoản' });
 });
