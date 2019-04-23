@@ -34,7 +34,7 @@ router.get('/quen-mat-khau/', function(req, res, next) {
   res.render('forgotpassword', { title:'EleFind - Lấy lại mật khẩu' });
 });
 
-router.get('/thong-tin-gio-hang', function(req, res, next) {
+router.get('/thong-tin-don-hang', function(req, res, next) {
   res.render('checkout', { title: app_name });
 });
 
