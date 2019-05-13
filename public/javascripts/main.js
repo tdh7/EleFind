@@ -7,8 +7,8 @@
 		$('#responsive-nav').toggleClass('active');
 	})
 
-	// Fix cart dropdown from closing
-	$('.cart-dropdown').on('click', function (e) {
+	// Fix index dropdown from closing
+	$('.index-dropdown').on('click', function (e) {
 		e.stopPropagation();
 	});
 
