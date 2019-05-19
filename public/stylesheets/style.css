@@ -787,7 +787,7 @@ textarea.input {
 
 #hot-deal.section {
   padding: 60px 0px;
-  margin: 30px 0px;
+  margin: 0px 0px;
   background-color: #E4E7ED;
   background-image: url('../images/hotdeal.png');
   background-position: center;
@@ -915,6 +915,9 @@ textarea.input {
 .product .product-body .product-name {
   text-transform: uppercase;
   font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .product .product-body .product-name>a {

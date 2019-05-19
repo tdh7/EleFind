@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var IndexController = require('../controllers');
+var IndexController = require('../controllers/index_controller');
 
 var SignInController = require('../controllers/account/sign_in');
 var SignUpController = require('../controllers/account/sign_up');
@@ -9,8 +9,8 @@ var UpdateInfoController = require('../controllers/account/update_info');
 var AccountRecoveryController = require('../controllers/account/account_recovery');
 
 
-var ProductItemDetailController = require('../controllers/product/product_item_detail');
-var ProductListController = require('../controllers/product/product_list_by_type');
+
+
 
 var SearchController = require('../controllers/util/search');
 
@@ -27,8 +27,7 @@ router.get('/cntk', UpdateInfoController.update_info);
 router.get('/quen-mat-khau', AccountRecoveryController.account_recovery);
 
 
-router.get('/xem-chi-tiet',ProductItemDetailController.product_detail);
-router.get('/danh-sach-san-pham-theo-loai', ProductListController.list_by_type);
+//router.get('/xem-chi-tiet',ProductItemDetailController.sample);
 
 router.get('/tim-kiem', SearchController.index);
 

@@ -12,21 +12,21 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.min.css"/>
 
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="stylesheets/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="stylesheets/slick-theme.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/slick-theme.css"/>
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="stylesheets/nouislider.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/nouislider.min.css"/>
 
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="stylesheets/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/style.css"/>
     <link type="text/css" rel="stylesheet" href="{{{customStyleSheet}}}"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -66,7 +66,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="/" class="logo">
-                            <img src="./images/logo.png" alt="">
+                            <img src="/images/logo.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -75,18 +75,18 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <option value="0">Toàn bộ</option>
-                                <option value="1">Máy tính</option>
-                                <option value="2">Điện thoại</option>
-                                <option value="3">Máy tính bảng</option>
-                                <option value="4">Phụ kiện</option>
-
-
+                        <form action="/san-pham">
+                            <select name="danhmuc" class="input-select">
+                            {{#select data.category}}
+                                <option name="danhmuc" value="all">Toàn bộ</option>
+                                <option name="danhmuc" value="laptop">Máy tính xách tay</option>
+                                <option name="danhmuc" value="smartphone">Điện thoại</option>
+                                <option name="danhmuc" value="tablet">Máy tính bảng</option>
+                                <option name="danhmuc" value="accessory">Phụ kiện</option>
+                                {{/select}}
                             </select>
-                            <input class="input" placeholder="Tìm kiếm điện thoại, máy tính ...">
-                            <button class="search-btn" onclick="/tim-kiem">Tìm</button>
+                            <input class="input" name="timkiem" placeholder="Tìm kiếm điện thoại, máy tính ..." value="{{data.search}}">
+                            <button class="search-btn">Tìm</button>
                         </form>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                                 <div class="cart-list">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="./images/product01.png" alt="">
+                                            <img src="/images/product01.png" alt="">
                                         </div>
                                         <div class="product-body">
                                             <h3 class="product-name"><a href="/">product name goes here</a></h3>
@@ -127,7 +127,7 @@
 
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="./images/product02.png" alt="">
+                                            <img src="/images/product02.png" alt="">
                                         </div>
                                         <div class="product-body">
                                             <h3 class="product-name"><a href="/">product name goes here</a></h3>
@@ -177,12 +177,11 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="/">Trang chủ</a></li>
-                <li><a href="/tim-kiem">Sản phẩm bán chạy</a></li>
-                <li><a href="/danh-sach-san-pham-theo-loai">Danh mục sản phẩm</a></li>
-                <li><a href="/danh-sach-san-pham-theo-loai">Máy tính xách tay</a></li>
-                <li><a href="/danh-sach-san-pham-theo-loai">Điện thoại</a></li>
-                <li><a href="/danh-sach-san-pham-theo-loai">Máy ảnh</a></li>
-                <li><a href="/danh-sach-san-pham-theo-loai">Phụ kiện</a></li>
+                <li><a href="/san-pham">Tất cả sản phẩm</a></li>
+                <li><a href="/san-pham?danhmuc=laptop">Máy tính xách tay</a></li>
+                <li><a href="/san-pham?danhmuc=smartphone">Điện thoại</a></li>
+                <li><a href="/san-pham?danhmuc=camera">Máy ảnh</a></li>
+                <li><a href="/san-pham?danhmuc=accessory">Phụ kiện</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -289,21 +288,21 @@
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
-<script src="javascripts/jquery.min.js"></script>
-<script src="javascripts/bootstrap.min.js"></script>
-<script src="javascripts/slick.min.js"></script>
-<script src="javascripts/nouislider.min.js"></script>
-<script src="javascripts/jquery.zoom.min.js"></script>
-<script src="javascripts/main.js"></script>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/slick.min.js"></script>
+<script src="/javascripts/nouislider.min.js"></script>
+<script src="/javascripts/jquery.zoom.min.js"></script>
+<script src="/javascripts/main.js"></script>
 
-<script src="javascripts/jquery-3.3.1.min.js"></script>
-<script src="javascripts/jquery-ui.js"></script>
-<script src="javascripts/popper.min.js"></script>
-<script src="javascripts/bootstrap.min.js"></script>
-<script src="javascripts/owl.carousel.min.js"></script>
-<script src="javascripts/jquery.magnific-popup.min.js"></script>
-<script src="javascripts/aos.js"></script>
+<script src="/javascripts/jquery-3.3.1.min.js"></script>
+<script src="/javascripts/jquery-ui.js"></script>
+<script src="/javascripts/popper.min.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/owl.carousel.min.js"></script>
+<script src="/javascripts/jquery.magnific-popup.min.js"></script>
+<script src="/javascripts/aos.js"></script>
 
-<script src="javascripts/maincart.js"></script>
+<script src="/javascripts/maincart.js"></script>
 </body>
 </html>

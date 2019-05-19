@@ -8,19 +8,19 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="./images/product01.png" alt="">
+								<img src="/images/{{data.product.image}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./images/product03.png" alt="">
+								<img src="/images/product03.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./images/product06.png" alt="">
+								<img src="/images/product06.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./images/product08.png" alt="">
+								<img src="/images/product08.png" alt="">
 							</div>
 						</div>
 					</div>
@@ -30,19 +30,19 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="./images/product01.png" alt="">
+								<img src="/images/{{data.product.image}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./images/product03.png" alt="">
+								<img src="/images/product03.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./images/product06.png" alt="">
+								<img src="/images/product06.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="./images/product08.png" alt="">
+								<img src="/images/product08.png" alt="">
 							</div>
 						</div>
 					</div>
@@ -51,7 +51,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">Tên sản phẩm</h2>
+							<h2 class="product-name">{{data.product.name}}</h2>
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -60,13 +60,24 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#">10 Nhận xét(s) | Thêm nhận xét</a>
+
+								<a class="review-link" href="#">{{#if data.product.comment_count}} {{data.product.comment_count}} {{else}} 0 {{/if}} Nhận xét(s) | Thêm nhận xét</a>
 							</div>
 							<div>
-								<h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
-								<span class="product-available">Còn hàng</span>
+								<h3 class="product-price">{{data.product.price}}
+                                    {{#if data.product.oldPrice}}
+                                        <del class="product-old-price">{{data.product.oldPrice}}</del></h3>
+                                    {{/if}}
+								<span class="product-available">
+                                    {{#if data.product.out_of_product}}
+                                        Hết hàng
+                                    {{else}}
+                                        Còn hàng
+                                    {{/if}}
+                                </span>
 							</div>
-							<p>Không hổ danh là một chiếc laptop phù hợp với doanh nhân bởi Dell Vostro 5471 khoác lên mình một vẻ ngoài thật sự bắt mắt và sang trọng. Với vỏ làm từ nhôm, máy sở hữu một trọng lượng khá nhẹ chỉ 1.67kg giúp tối ưu việc di chuyển của người dùng, đặc biệt là doanh nhân. Đặc biệt, phần nhôm kim loại còn giúp bảo vệ máy trước mọi va đập, giúp thiết bị trở nên bền bỉ hơn.</p>
+							<p>{{data.product.description}}
+                            </p>
 
 							<div class="product-options">
 								<label>
@@ -359,7 +370,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="./images/product01.png" alt="">
+								<img src="/images/product01.png" alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span>
 								</div>
@@ -387,7 +398,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="./images/product02.png" alt="">
+								<img src="/images/product02.png" alt="">
 								<div class="product-label">
 									<span class="new">NEW</span>
 								</div>
@@ -422,7 +433,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="./images/product03.png" alt="">
+								<img src="/images/product03.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Tên danh mục</p>
@@ -452,7 +463,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="./images/product04.png" alt="">
+								<img src="/images/product04.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Tên danh mục</p>
