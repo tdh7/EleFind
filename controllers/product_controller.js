@@ -34,8 +34,11 @@ exports.product_detail = async (req,res,next) => {
     };
     console.log("receive category = " + category + ", product_id = " + productId);
     const result = await product.find_product_by_category_and_id(category,productId);
-    if(result)
-    data.product = result;
-    res.render('product/detail',{title:'Elefind - Danh sách sản phẩm',data});
+    if(result) {
+        data.product = result;
+        res.render('product/detail', {title: 'Elefind - Danh sách sản phẩm', data});
+    } else {
+        res.render('error', { customStyleSheet:'stylesheets/error.css' });
+    }
 
 };
