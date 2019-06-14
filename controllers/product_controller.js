@@ -22,6 +22,10 @@ exports.home = async function(req, res, next) {
     else if(category) data.products = await product.query_by_category(category);
     else data.products = await product.all();
 
+    if(req.user) {
+        data.user = req.user;
+    }
+
     res.render('product/product_all', { title:'EleFind - Danh sách sản phẩm',data });
 };
 
@@ -32,6 +36,10 @@ exports.product_detail = async (req,res,next) => {
     const data = {
         product
     };
+    if(req.user) {
+        data.user = req.user;
+    }
+
     console.log("receive category = " + category + ", product_id = " + productId);
     const result = await product.find_product_by_category_and_id(category,productId);
     if(result) {
@@ -40,5 +48,6 @@ exports.product_detail = async (req,res,next) => {
     } else {
         res.render('error', { customStyleSheet:'stylesheets/error.css' });
     }
+
 
 };

@@ -1,5 +1,5 @@
 
-exports.cart = function(req, res, next) {
+exports.home = function(req, res, next) {
     /*  let fs = require('fs');
       let path = process.cwd();
       let buffer = fs.readFileSync(path + "/public/csslink/index.hbs");*/

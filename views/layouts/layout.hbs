@@ -46,11 +46,25 @@
             <ul class="header-links pull-left">
                 <li><a href="/"><i class="fa fa-phone"></i> +091-23-54-33</a></li>
                 <li><a href="/"><i class="fa fa-envelope-o"></i> elefind@t2tr.com</a></li>
-                <li><a href="/"><i class="fa fa-map-marker"></i> Đường Nguyễn Văn Cừ, Quận 5,TP.HCM</a></li>
+                <li><a href="/"><i class="fa fa-map-marker"></i> Đường NVC, Q.5,TP.HCM</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="/dang-nhap"><i class="fa fa-user-o"></i> Đăng nhập</a></li>
-                <li><a href="/dang-ky"><i class="fas fa-sign-in-alt"></i> Đăng ký</a></li>
+                {{#if data.user}}
+                    <li><a href="/tai-khoan"><i class="fa fa-user-o"></i>{{data.user.firstName}} {{data.user.lastName}}</a></li>
+                    <li><a href="/dang-xuat"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                {{else}}
+                    {{#if data.isSignInPage}}
+                    {{else}}
+                        <li><a href="/dang-nhap"><i class="fa fa-user-o"></i> Đăng nhập</a></li>
+                    {{/if}}
+                    {{#if data.isSignUpPage}}
+                    {{else}}
+                        <li><a href="/dang-ky"><i class="fas fa-sign-in-alt"></i> Đăng ký</a></li>
+                    {{/if}}
+
+                {{/if}}
+
+
             </ul>
         </div>
     </div>
@@ -77,16 +91,16 @@
                     <div class="header-search">
                         <form action="/san-pham">
                             <select name="danhmuc" class="input-select">
-                            {{#select data.category}}
-                                <option name="danhmuc" value="all">Toàn bộ</option>
-                                <option name="danhmuc" value="laptop">Máy tính xách tay</option>
-                                <option name="danhmuc" value="smartphone">Điện thoại</option>
-                                <option name="danhmuc" value="tablet">Máy tính bảng</option>
-                                <option name="danhmuc" value="accessory">Phụ kiện</option>
+                                {{#select data.category}}
+                                    <option name="danhmuc" value="all">Toàn bộ</option>
+                                    <option name="danhmuc" value="laptop">Máy tính xách tay</option>
+                                    <option name="danhmuc" value="smartphone">Điện thoại</option>
+                                    <option name="danhmuc" value="tablet">Máy tính bảng</option>
+                                    <option name="danhmuc" value="accessory">Phụ kiện</option>
                                 {{/select}}
                             </select>
                             <input class="input" name="timkiem" placeholder="Tìm kiếm điện thoại, máy tính ..." value="{{data.search}}">
-                            <button class="search-btn">Tìm</button>
+                            <button class="search-btn">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
@@ -95,22 +109,30 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
-                        <!-- Wishlist -->
+
+                        <!-- History Order -->
                         <div>
                             <a href="/lich-su-mua-hang">
                                 <i class="fa fa-history"></i>
                                 <span>Lịch sử</span>
-                                <div class="qty">2</div>
+                                {{#if data.user.historyOrder}}
+                                {{#notEquals data.user.historyOrder.length 0}}
+                                    <div class="qty">{{data.user.historyOrder.length}}</div>
+                                {{/notEquals}}
+                                {{/if}}
                             </a>
                         </div>
-                        <!-- /Wishlist -->
-
+                        <!-- /History Order -->
                         <!-- Cart -->
                         <div class="dropdown">
                             <a href="/quan-ly-gio-hang">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
-                                <div class="qty">3</div>
+                                {{#if data.user.cart}}
+                                {{#notEquals data.user.cart.length 0}}
+                                    <div class="qty">{{data.user.cart.length}}</div>
+                                {{/notEquals}}
+                                {{/if}}
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
@@ -190,7 +212,7 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-    {{{body}}}
+{{{body}}}
 
 <!-- FOOTER -->
 <footer id="footer">
@@ -244,10 +266,11 @@
                     <div class="footer">
                         <h3 class="footer-title">Dịch vụ</h3>
                         <ul class="footer-links">
-                            <li><a href="/cap-nhat-tai-khoan">Tài khoản của tôi</a></li>
+                            <li><a href="/tai-khoan">Tài khoản của tôi</a></li>
                             <li><a href="/quan-ly-gio-hang">Xem Giỏ hàng</a></li>
                             <li><a href="/lich-su-mua-hang">Lịch sủ mua hàng</a></li>
-                            <li><a href="/thong-tin-don-hang">Xem đơn hàng</a></li>
+                            <li><a href="/web-parser">Web Parser</a></li>
+                            <li><a href="/old-data">Old Data</a></li>
                         </ul>
                     </div>
                 </div>
