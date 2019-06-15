@@ -166,4 +166,83 @@
 	}
 
 })(jQuery);
+function goToWhileKeepingParameter(url,key,value) {
+	if(key&&value)
+	window.location.replace(updateUrl(url+document.location.search,key,value));
+	else window.location.replace(url+document.location.search);
+}
 
+function onParameterChanged(key,value) {
+	window.location.replace(updateUrl(document.location.pathname + document.location.search,key,value));
+}
+
+function onOrderChanged(element) {
+	console.log(document.location.pathname);
+	window.location.replace(updateUrl(document.location.pathname + document.location.search ,'order', element.value));
+}
+/**
+ * Add a URL parameter (or changing it if it already exists)
+ * @param {search} string  this is typically document.location.search
+ * @param {key}    string  the key to set
+ * @param {val}    string  value
+ */
+var addUrlParam = function(search, key, val){
+	var newParam = key + '=' + val,
+		params = '?' + newParam;
+
+	// If the "search" string exists, then build params from it
+	if (search) {
+		// Try to replace an existance instance
+		params = search.replace(new RegExp('([?&])' + key + '[^&]*'), '$1' + newParam);
+
+		// If nothing was replaced, then add the new param to the end
+		if (params === search) {
+			params += '&' + newParam;
+		}
+	}
+
+	return params;
+};
+function updateUrl(url,key,value){
+	if(value!==undefined){
+		value = encodeURI(value);
+	}
+	var urls = url.split('?');
+	var baseUrl = urls[0];
+	var parameters = '';
+	var outPara = {};
+	if(urls.length>1){
+		parameters = urls[1];
+	}
+	if(parameters!==''){
+		parameters = parameters.split('&');
+		for(k in parameters){
+			var keyVal = parameters[k];
+			keyVal = keyVal.split('=');
+			var ekey = keyVal[0];
+			var eval = '';
+			if(keyVal.length>1){
+				eval = keyVal[1];
+			}
+			outPara[ekey] = eval;
+		}
+	}
+
+	if(value!==undefined){
+		outPara[key] = value;
+	}else{
+		delete outPara[key];
+	}
+	parameters = [];
+	for(var k in outPara){
+		parameters.push(k + '=' + outPara[k]);
+	}
+
+	var finalUrl = baseUrl;
+
+	if(parameters.length>0){
+		finalUrl += '?' + parameters.join('&');
+	}
+
+	return finalUrl;
+}

@@ -15,7 +15,40 @@ exports.search_by_name = async (search) => {
 };
 
 exports.search_by_category_and_name = async(category, search) => {
-    return await dbs.production.collection(PRODUCTS).find({category: category, name: {$regex: search, $options: "$i"}}).toArray();
+    const query = {};
+
+    if(category&&category!=='all') query.category = category;
+
+    if(search) query.name = {$regex: search, $options: "$i"};
+
+    const result = {};
+    return await dbs.production.collection(PRODUCTS).find(query).toArray();
+};
+exports.search = async(category, search, page, pageSize,order) => {
+    const query = {};
+
+    if(category&&category!=='all') query.category = category;
+
+    if(search) query.name = {$regex: search, $options: "$i"};
+
+    const result = {};
+    result.page = page;
+    result.pageSize = pageSize;
+    result.size =  await dbs.production.collection(PRODUCTS).find(query).count();
+
+    // init sort
+    let sort;
+    switch (order) {
+        case 'nameasc': sort = {name : 1};break;
+        case 'namedesc': sort = {name: -1}; break;
+        case 'newest':sort ={_id:1};break;
+        case 'eldest':sort={_id:-1};break;
+       // case 'priceasc' : sort ={price: 1};break;
+      //  case 'pricedesc' :sort ={price :-1};break;
+    }
+
+    result.products = await dbs.production.collection(PRODUCTS).find(query).sort(sort).skip((pageSize*page)-pageSize).limit(pageSize).toArray();
+    return result;
 };
 
 exports.find_product_by_category_and_id = async (category, productId) => {
@@ -34,6 +67,19 @@ const all = async() => {
     return await dbs.production.collection(PRODUCTS).find({}).toArray();
 };
 
+exports.all_by_page = async (page,perPage) => {
+    const result = {};
+    result.count = await dbs.production.collection(PRODUCTS).find({}).count();
+    result.page = page;
+    result.perPage = perPage;
+
+    result.data = await (dbs.production
+        .collection(PRODUCTS)
+        .find({})
+        .skip((perPage*page)-perPage).limit(perPage).toArray());
+    return result;
+};
+
 exports.all_old_product = async () => {
     return await dbs.production.collection('product').find({}).toArray();
 };
@@ -41,6 +87,8 @@ exports.all_old_product = async () => {
 exports.query_by_category = async (category) => {
     return await dbs.production.collection(PRODUCTS).find({category: category}).toArray();
 };
+
+
 
 exports.insertArrayOfDoc = async (data) => {
     console.log('data length :'+data.length);

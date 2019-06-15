@@ -1,3 +1,4 @@
+const paginate = require('handlebars-paginate');
 var register = function(Handlebars) {
     var helpers = {
         'equals' : function(arg1, arg2, options) {
@@ -20,6 +21,7 @@ var register = function(Handlebars) {
         'elefind.address': function() {
             return "Đường Nguyễn Văn Cừ, Quận 5,TP.HCM";
         },
+        'paginate' :paginate
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

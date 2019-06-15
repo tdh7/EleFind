@@ -3,6 +3,7 @@ const product = require('../models/product');
 const index = require('../models/index');
 const userModel = require('../models/user');
 const passport = require('passport');
+const Util = require('../helpers/util');
 
 exports.home = async(req, res, next) => {
     let data = {
@@ -20,6 +21,7 @@ exports.home = async(req, res, next) => {
         const products = await product.query_by_category(topCategoriesArray[i].category);
     //    console.log("index_controller : getting image "+products[0].image);
         topCategoriesArray[i].image = products[0].image;
+        if(topCategoriesArray[i].image) topCategoriesArray[i].image = Util.getOriginalImages(topCategoriesArray[i].image);
     }
     data.top_categories = topCategoriesArray;
     data.products_sections =  await get_products_sections();
@@ -110,7 +112,7 @@ exports.registerPost = async (req,res, next) => {
     else {
         const data ={};
         data.cache = req.body;
-        data.error = 'Xin lỗi, hệ thóng không thể tạo tài khoản cho bạn, vui lòng thử lại :/';
+        data.error = 'Xin lỗi, hệ thống không thể tạo tài khoản cho bạn, vui lòng thử lại :/';
         return res.render('account/sign_up',{title:'Elefind - Đăng ký tài khoản',data});
     }
 };
