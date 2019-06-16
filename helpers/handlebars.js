@@ -1,4 +1,5 @@
 const paginate = require('handlebars-paginate');
+const util = require('util');
 var register = function(Handlebars) {
     var helpers = {
         'equals' : function(arg1, arg2, options) {
@@ -21,7 +22,23 @@ var register = function(Handlebars) {
         'elefind.address': function() {
             return "Đường Nguyễn Văn Cừ, Quận 5,TP.HCM";
         },
-        'paginate' :paginate
+        'paginate' :paginate,
+        'originalImage':function (options) {
+            return options.fn(this).replace(/([0-9]+x[0-9]+)|w[0-9]+/,'w1200');
+        },
+        'previewImage':function (options) {
+            return options.fn(this).replace(/([0-9]+x[0-9]+)|w[0-9]+/,'300x300');
+        },
+        'breakLines': function(plaintext) {
+            var i, output = '',
+                lines = plaintext.split(/\r\n|\r|\n/g);
+            for (i = 0; i < lines.length; i++) {
+                if(lines[i]) {
+                    output += '<p>' + lines[i] + '</p>';
+                }
+            }
+            return Handlebars.SafeString(output);
+        }
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

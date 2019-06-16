@@ -2,7 +2,7 @@
 const ObjectId = require('mongodb').ObjectId;
 const { dbs } = require('../dbs');
 
-const PRODUCTS = 'products';
+const PRODUCTS = 'tempProduct';
 
 exports.find_product_by__object_id = async (id) => {
     const results = await dbs.production.collection(PRODUCTS).find({_id: ObjectId(id)})
@@ -88,11 +88,25 @@ exports.query_by_category = async (category) => {
     return await dbs.production.collection(PRODUCTS).find({category: category}).toArray();
 };
 
-
-
 exports.insertArrayOfDoc = async (data) => {
     console.log('data length :'+data.length);
      await dbs.production.collection('products').insertMany(data);
+};
+
+exports.set_data = async (data) => {
+    await dbs.production.collection(PRODUCTS).deleteMany({});
+    await dbs.production.collection(PRODUCTS).insertMany(data);
+};
+exports.override_data_to_collection = async (collection,data) => {
+    if(data.length>0) {
+        await dbs.production.collection(collection).deleteMany({});
+        await dbs.production.collection(collection).insertMany(data);
+    }
+};
+
+exports.update_data_to_collection = async (collection,data) => {
+  for(let i = 0;i<data.length;i++)
+      await dbs.production.collection(collection).update({id:data[i].id},data[i]);
 };
 
 exports.all = all;

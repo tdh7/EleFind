@@ -7,21 +7,17 @@
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
-							<div class="product-preview">
-								<img src="{{data.product.image}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product03.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product06.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product08.png" alt="">
-							</div>
+                            {{#if data.product.images }}
+                                {{#each data.product.images }}
+                                    <div class="product-preview">
+                                        <img src="{{#originalImage}}{{this}}{{/originalImage}}" alt="">
+                                    </div>
+                                {{/each}}
+                            {{else}};
+                                <div class="product-preview">
+                                    <img src="{{data.product.image}}" alt="">
+                                </div>
+                            {{/if}}
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -29,21 +25,17 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
+                            {{#if data.product.images }}
+                            {{#each data.product.images }}
 							<div class="product-preview">
-								<img src="{{data.product.image}}" alt="">
+								<img src="{{#previewImage}}{{this}}{{/previewImage}}" alt="">
 							</div>
-
-							<div class="product-preview">
-								<img src="/images/product03.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product06.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product08.png" alt="">
-							</div>
+                            {{/each}}
+                            {{else}};
+                                <div class="product-preview">
+                                    <img src="{{data.product.image}}" alt="">
+                                </div>
+                            {{/if}}
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -76,7 +68,7 @@
                                     {{/if}}
                                 </span>
 							</div>
-							<p>{{data.product.description}}
+							<p><!--data.product.description-->
                             </p>
 
 							<div class="product-options">
@@ -139,7 +131,7 @@
 							<!-- product tab nav -->
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-								<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>
+								<!--<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>-->
 								<li><a data-toggle="tab" href="#tab3">Nhận xét (3)</a></li>
 							</ul>
 							<!-- /product tab nav -->
@@ -150,7 +142,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Dell Vostro 5471 i7 thuộc dòng Vostro. Máy tính xách tay được thiết kế tròn ở hai bên và ở phía trước , sau, làm cho máy rất ấn tượng . Ba mặt của Dell Vostro 5471 được làm từ nhôm anodized, cải thiện độ bền của máy tính xách tay. Bên cạnh đó, bề mặt kim loại của máy tính xách tay đã được xử lý bằng công nghệ phun cát nhiều lần, mang lại kết cấu tốt.</p>
+                                            {{{data.product.description}}}
 										</div>
 									</div>
 								</div>
@@ -160,7 +152,7 @@
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Dell Vostro V5471 i7 có màn hình 14.0-inch FHD IPS (1920 x 1080) Anti-Glare LED-Backlit Display với góc nhìn tuyệt vời. Màn hình có độ tương phản cao và chức năng chống chói. Màn hình hiển thị hình ảnh rõ ràng và tự nhiên. Đối với người dùng văn phòng, Dell Vostro 5471 là một lựa chọn tốt. Chúng tôi đã sử dụng Spyder 5 để kiểm tra không gian màu sắc và hiệu suất màn hình. Về kết quả kiểm tra, chúng ta có thể thấy rằng không gian màu sRGB của màn hình đạt đến 64%, độ sáng của màn hình là 183nits, và NTSC của màn hình đạt đến 45%. Màn hình Vostro 14 5471 tăng cường không gian màu tiêu chuẩn và nó có thể hoàn toàn đáp ứng tốt với công việc văn phòng hàng ngày</p>
+											Dell Vostro V5471 i7 có màn hình 14.0-inch FHD IPS (1920 x 1080) Anti-Glare LED-Backlit Display với góc nhìn tuyệt vời. Màn hình có độ tương phản cao và chức năng chống chói. Màn hình hiển thị hình ảnh rõ ràng và tự nhiên. Đối với người dùng văn phòng, Dell Vostro 5471 là một lựa chọn tốt. Chúng tôi đã sử dụng Spyder 5 để kiểm tra không gian màu sắc và hiệu suất màn hình. Về kết quả kiểm tra, chúng ta có thể thấy rằng không gian màu sRGB của màn hình đạt đến 64%, độ sáng của màn hình là 183nits, và NTSC của màn hình đạt đến 45%. Màn hình Vostro 14 5471 tăng cường không gian màu tiêu chuẩn và nó có thể hoàn toàn đáp ứng tốt với công việc văn phòng hàng ngày
 										</div>
 									</div>
 								</div>
