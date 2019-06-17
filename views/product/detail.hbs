@@ -90,7 +90,7 @@
 								</label>
 							</div>
 
-							<div class="add-to-cart">
+							<div class="add-to-cart" >
 								<div class="qty-label">
 									Số lượng
 									<div class="input-number">
@@ -99,7 +99,10 @@
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
+                                <a id="anchor_product_{{data.product.id}}"  class="anchor_product_{{data.product.id}}" href="javascript:add_to_cart({{data.product.id}});">
+                                    <button type="button" id="button_product_{{data.product.id}}" class="add-to-cart-btn button_product_{{data.product.id}}">
+                                        <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                </a>
 							</div>
 
 							<ul class="product-btns">
@@ -425,6 +428,7 @@
                                     <button type="button" id="button_product_{{data.product.id}}" class="add-to-cart-btn">
                                         <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
                                 </a>
+
 							</div>
 						</div>
 					</div>
@@ -463,6 +467,7 @@
 <!-- /Section -->
 <script>
 
+
     function load_review(page) {
         $.ajax({
             type: 'GET',
@@ -477,4 +482,5 @@
             }
         })
     }
+
 </script>

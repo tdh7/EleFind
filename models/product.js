@@ -2,7 +2,7 @@
 const ObjectId = require('mongodb').ObjectId;
 const { dbs } = require('../dbs');
 
-const PRODUCTS = 'tempProduct';
+const PRODUCTS = 'products';
 
 exports.find_product_by__object_id = async (id) => {
     const results = await dbs.production.collection(PRODUCTS).find({_id: ObjectId(id)})

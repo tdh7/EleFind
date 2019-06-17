@@ -56,7 +56,10 @@ var register = function(Handlebars) {
                 else {
                     return datetime;
                 }
-            }
+            },
+        "formatVND" : function (vnd) {
+                return  vnd.toLocaleString('vi', {style: 'currency', currency: 'VND'});
+        }
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

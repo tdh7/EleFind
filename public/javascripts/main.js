@@ -246,7 +246,9 @@ function updateUrl(url,key,value){
 
 	return finalUrl;
 }
-
+function format(x) {
+	return  x.toLocaleString('vi', {style: 'currency', currency: 'VND'});
+}
 function cartAnchor(id) {
 	return " <a  href=\"javascript:add_to_cart(+"+id+");\">\n" +
 		"                                            <button type=\"button\" class=\"add-to-cart-btn\">\n" +
@@ -259,25 +261,123 @@ function removeAnchor(id) {
 		"                                            <i class=\"fa fa-shopping-cart\"></i>Thêm vào giỏ</button>\n" +
 		"                                        </a>"
 }
+function check_existed_cart(element,product_id) {
+	console.log('you click enter on product '+product_id);
+	$.ajax({
+		type: 'POST',
+		url: "/gio-hang/check_existed_cart",
+		data: {
+			product_id: product_id
+		},
+		success: function (res) {
+			console.log(res);
+			if (element) {
+				if(res.exist)
+				$(element).find('.anchor_product_'+product_id).html(cartAnchor(product_id));
+				else $(element).find('.anchor_product_'+product_id).html(removeAnchor(product_id));
+				/*if(res.exist) element.getElementById("anchor_product_"+product_id).html(cartAnchor(product_id));
+				else  element.getElementById("anchor_product_"+product_id).html(removeAnchor(product_id));*/
+			} else {
+				if (res.exist) $('.anchor_product_' + product_id).html(cartAnchor(product_id));
+				else $('.anchor_product_' + product_id).html(removeAnchor(product_id));
+			}
+		}
+	})
+}
+function update_cart_dropdown(cart) {
+	console.log(cart);
+	$('.header-ctn .dropdown .qty')[0].textContent= cart.length;
+}
 
+function plus(id) {
+	console.log('you click plus buton on product '+id);
+	$.ajax({
+		type: 'POST',
+		url: "/gio-hang/plus",
+		data: {
+			product_id: id
+		},
+		success: function (res) {
+			console.log(res);
+			if(checkIsSignIn(res)) {
+				if(res.result==='success') {
+					$('#row_product_count_'+id).val(res.count);
+					$('#total_product_'+id).html(format(res.thisPrice));
+					$('#priceAll1').html(format(res.price));
+					$('#priceAll2').html(format(res.price));
+				}
+			}
+		}
+	})
+}
+function minus(id) {
+	console.log('you click minus buton on product '+id);
+	$.ajax({
+		type: 'POST',
+		url: "/gio-hang/minus",
+		data: {
+			product_id: id
+		},
+		success: function (res) {
+			console.log(res);
+			if(checkIsSignIn(res)) {
+				if(res.result==='success') {
+					$('#row_product_count_'+id).val(res.count);
+					$('#total_product_'+id).html(format(res.thisPrice));
+					$('#priceAll1').html(format(res.price));
+					$('#priceAll2').html(format(res.price));
+				}
+			}
+		}
+	})
+}
+function remove(id) {
+console.log('you click remove buton on product '+id);
+	$.ajax({
+		type: 'POST',
+		url: "/gio-hang/remove",
+		data: {
+			product_id: id
+		},
+		success: function (res) {
+			console.log(res);
+			if(checkIsSignIn(res)) {
+				if(res.result==='success') {
+					$('#row_product_'+id).remove();
+					$('#priceAll1').html(format(res.price));
+					$('#priceAll2').html(format(res.price));
+				}
+			}
+		}
+	})
+}
+function checkIsSignIn(res) {
+	if(!res.isSignIn) {
+		alert("Đăng nhập đã nhé ^^");
+		window.location.href = '/dang-nhap?redirect='+window.location.href;
+	}
+	return res.isSignIn;
+}
 
 function add_to_cart(product_id) {
 	console.log('you click add-to-cart on product '+product_id);
 
 	$.ajax({
 		type: 'POST',
-		url: "gio-hang/add_to_cart",
+		url: "/gio-hang/add_to_cart",
 		data : {
 			product_id:product_id
 		},
 		success: function(res){
 			console.log(res);
+			if(res.cart) update_cart_dropdown(res.cart);
 			if(!res.isSignIn) {
 				alert("Đăng nhập đã nhé ^^");
-				window.location.href = '/dang-nhap?redirect='+window.location.search;
+				window.location.href = '/dang-nhap?redirect='+window.location.href;
 			}
-			else if(res.result==='added') $('#anchor_product_'+product_id).html(cartAnchor(product_id));
-			else if(res.result==='removed') $('#anchor_product_'+product_id).html(removeAnchor(product_id));
+			else if(res.result==='added') $('.anchor_product_'+product_id).html(cartAnchor(product_id));
+			else if(res.result==='removed') $('.anchor_product_'+product_id).html(removeAnchor(product_id));
+			console.log($('.anchor_product_'+product_id));
 
 		},
 		error: function(status){

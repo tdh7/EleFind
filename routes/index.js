@@ -23,6 +23,6 @@ router.get('/dang-xuat',IndexController.logout);
 router.get('/quen-mat-khau', IndexController.accountRecovery);
 
 router.get('/web-parser',UtilController.parseWebsite);
-router.get('/normalize',UtilController.oldData);
+router.get('/normalize',UtilController.normalize);
 
 module.exports = router;

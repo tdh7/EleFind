@@ -94,14 +94,34 @@ exports.data_receiver = async () => {
     data.productList = [];
     data.brandList = [];
     data.reviews = [];
-    await exports.get_data_from_tiki(data,'https://tiki.vn/dien-thoai-smartphone/c1795',1,'smartphone','Điện thoại',300);
-    await exports.get_data_from_tiki(data,'https://tiki.vn/may-tinh-bang/c1794',0,'tablet','Máy tính bảng',300);
-    await exports.get_data_from_tiki(data,'https://tiki.vn/laptop/c8095',0,'laptop','Máy tính xách tay',300);
-    await exports.get_data_from_tiki(data,'https://tiki.vn/thiet-bi-am-thanh-va-phu-kien/c8215',0,'accessory','Phụ kiện',300);
-    await exports.get_data_from_tiki(data,'https://tiki.vn/may-anh/c28806',0,'camera','Máy ảnh',300);
-    await exports.get_data_from_tiki(data,'https://tiki.vn/ban-phim/c1830',0,'accessory','Phụ kiện',300);
+    await exports.get_data_from_tiki(data,'https://tiki.vn/dien-thoai-smartphone/c1795',4,'smartphone','Điện thoại',300);
 
-    await product.update_data_to_collection('tempProduct',data.productList);
+    await product.override_data_to_collection('products',data.productList);
+    await product.override_data_to_collection('reviews',data.reviews);
+
+
+    await exports.get_data_from_tiki(data,'https://tiki.vn/may-tinh-bang/c1794',3,'tablet','Máy tính bảng',300);
+    await exports.get_data_from_tiki(data,'https://tiki.vn/laptop/c8095',3,'laptop','Máy tính xách tay',300);
+
+    await product.override_data_to_collection('products',data.productList);
+    await product.override_data_to_collection('reviews',data.reviews);
+
+
+    await exports.get_data_from_tiki(data,'https://tiki.vn/thiet-bi-am-thanh-va-phu-kien/c8215',3,'accessory','Phụ kiện',300);
+
+    await product.override_data_to_collection('products',data.productList);
+    await product.override_data_to_collection('reviews',data.reviews);
+
+
+    await exports.get_data_from_tiki(data,'https://tiki.vn/may-anh/c28806',3,'camera','Máy ảnh',300);
+
+    await product.override_data_to_collection('products',data.productList);
+    await product.override_data_to_collection('reviews',data.reviews);
+
+
+    await exports.get_data_from_tiki(data,'https://tiki.vn/ban-phim/c1830',3,'accessory','Phụ kiện',300);
+
+    await product.override_data_to_collection('products',data.productList);
     await product.override_data_to_collection('reviews',data.reviews);
 
     for(let i = 0; i<data.brandList.length;i++) {
@@ -112,7 +132,7 @@ exports.data_receiver = async () => {
         }
     }
 
-  //  await product.set_data_to_collection('tempBrand',data.brandList);
+    await product.override_data_to_collection('brands',data.brandList);
 };
 exports.parse_detail_product_old = async (product, url) => {
     const html = await rp(url);

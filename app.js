@@ -76,7 +76,7 @@ app.use('/', indexRouter);
 app.use('/san-pham',productRouter);
 app.use('/gio-hang',cartRouter);
 app.use('/thanh-toan',checkoutRouter);
-app.use('/quan-ly-don-hang',historyOrder);
+app.use('/lich-su-mua-hang',historyOrder);
 app.use('/tai-khoan',accountRouter);
 
 
