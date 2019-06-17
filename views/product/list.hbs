@@ -1,70 +1,66 @@
 <!-- SECTION -->
 <div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- ASIDE -->
-					<div id="aside" class="col-md-3">
-						<!-- aside Widget -->
-						<div class="aside">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- ASIDE -->
+			<div id="aside" class="col-md-3">
+				<!-- aside Widget -->
+				<!-- aside Widget -->
+				<div class="aside">
+					<form action="/san-pham" method="get">
+						<div class="checkbox-filter" id="categoryfilters">
 							<h3 class="aside-title">Danh mục</h3>
-                            <form action="/san-pham" method="get" >
-							<div class="checkbox-filter" id="categoryfilters">
-                                {{#each data.allCategories }}
-								<div class="input-checkbox">
-									<input type="checkbox" name="category-{{@index}}" id="category-{{@index}}" onchange="this.form.submit()" value="{{this.category}}">
-									<label for="category-{{@index}}">
-										<span></span>
-										{{this.categoryName}}
-								<!--		<small>(120)</small>-->
-									</label>
-								</div>
-                                {{/each}}
-							
+							{{#each data.allCategories }}
+							<div class="input-checkbox">
+								<input type="checkbox" name="danhmuc" id="category-{{@index}}"
+									value="{{this.category}}">
+								<label for="category-{{@index}}">
+									<span></span>
+									{{this.categoryName}}
+									<!--		<small>(120)</small>-->
+								</label>
 							</div>
-                            </form>
+							{{/each}}
 						</div>
-						<!-- /aside Widget -->
-
-						<!-- aside Widget -->
-						<div class="aside">
+						<div>
 							<h3 class="aside-title">Giá</h3>
 							<div class="price-filter">
 								<div id="price-slider"></div>
 								<div class="input-number price-min">
-									<input id="price-min" type="number">
+									<input id="price-min" type="number" name="price_min">
 									<span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
 								<span>-</span>
 								<div class="input-number price-max">
-									<input id="price-max" type="number">
+									<input id="price-max" type="number" name="price_max">
 									<span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
 							</div>
 						</div>
-						<!-- /aside Widget -->
-                        {{#if data.allBrands }}
-						<!-- aside Widget -->
 						<div class="aside">
 							<h3 class="aside-title">Thương hiệu</h3>
 							<div class="checkbox-filter" id="brandfilter">
-                                {{#each data.allBrands}}
+								{{#each data.allBrands}}
 								<div class="input-checkbox">
-									<input type="checkbox" id="brand-{{@index}}">
+									<input type="checkbox" id="brand-{{@index}}" name="brand"
+										value="{{this.displayName}}">
 									<label for="brand-{{@index}}">
 										<span></span>
 										{{this.displayName}}
 										<!--<small>(578)</small>-->
 									</label>
 								</div>
-                                {{/each}}
+								{{/each}}
 							</div>
 						</div>
-						<!-- /aside Widget -->
-                        {{/if}}
+						<button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
+					</form>
+				</div>
+				<!-- /aside Widget -->
 				<!--		 aside Widget
 						<div class="aside">
 							<h3 class="aside-title">Bán chạy nhất</h3>
@@ -102,142 +98,147 @@
 							</div>
 						</div>
 						 /aside Widget -->
+			</div>
+			<!-- /ASIDE -->
+
+			<!-- STORE -->
+			<div id="store" class="col-md-9">
+				<!-- store top filter -->
+				<div class="store-filter clearfix">
+					<div class="store-sort">
+						<label>
+							Sắp xếp theo:
+							<select onchange="onParameterChanged('order',this.value)" name="order" class="input-select">
+								{{#select data.order}}
+								<option value="default">Mặc định</option>
+								<option value="nameasc">A -> Z</option>
+								<option value="namedesc">Z -> A</option>
+								<option value="newest">Hàng mới</option>
+								{{/select}}
+							</select>
+						</label>
+
+						<label>
+							Số lượng hiển thị:
+							<select name="pagesize" onchange="onParameterChanged('pagesize',this.value)"
+								class="input-select">
+								{{#select data.pagesize}}
+								<option value="20">20</option>
+								<option value="50">50</option>
+								{{/select}}
+							</select>
+						</label>
 					</div>
-					<!-- /ASIDE -->
+					{{#notEquals data.pageCount 1}}
+					<ul class="store-pagination">
+						{{#paginate pagination type="previous"}}
+						{{#if disabled}}
+						{{else}}
+						<li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-left"></i></a>
+						</li>
+						{{/if}}
+						{{/paginate}}
 
-					<!-- STORE -->
-					<div id="store" class="col-md-9">
-						<!-- store top filter -->
-						<div class="store-filter clearfix">
-							<div class="store-sort">
-								<label>
-									Sắp xếp theo:
-									<select onchange="onParameterChanged('order',this.value)" name="order" class="input-select">
-                                    {{#select data.order}}
-										<option value="default">Mặc định</option>
-                                        <option value="nameasc">A -> Z</option>
-                                        <option value="namedesc">Z -> A</option>
-                                        <option value="newest">Hàng mới</option>
-                                    {{/select}}
-									</select>
-								</label>
+						{{#paginate pagination type="middle" limit = "5"}}
+						{{#if active}}
+						<li class="active">{{n}}</li>
+						{{else}}
+						<li><a href="javascript:onParameterChanged('page','{{n}}')">{{n}}</a></li>
+						{{/if}}
+						{{/paginate}}
+						{{#paginate pagination type="next"}}
+						<li><a href="javascript:onParameterChanged('page','{{n}}')"><i
+									class="fa fa-angle-right"></i></a></li>
+						{{/paginate}}
+					</ul>
+					{{/notEquals}}
+				</div>
+				<!-- /store top filter -->
 
-								<label>
-									Số lượng hiển thị:
-									<select name="pagesize" onchange="onParameterChanged('pagesize',this.value)" class="input-select">
-                                        {{#select data.pagesize}}
-										<option value="20">20</option>
-										<option value="50">50</option>
-                                        {{/select}}
-									</select>
-								</label>
-							</div>
-                            {{#notEquals data.pageCount 1}}
-                            <ul class="store-pagination">
-                                {{#paginate pagination type="previous"}}
-                                    {{#if disabled}}
-                                    {{else}}
-                                        <li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-left"></i></a></li>
-                                    {{/if}}
-                                {{/paginate}}
-
-                                {{#paginate pagination type="middle" limit = "5"}}
-                                    {{#if active}}
-                                        <li class="active">{{n}}</li>
-                                    {{else}}
-                                        <li><a href="javascript:onParameterChanged('page','{{n}}')">{{n}}</a></li>
-                                    {{/if}}
-                                {{/paginate}}
-                                {{#paginate pagination type="next"}}
-                                    <li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-right"></i></a></li>
-                                {{/paginate}}
-                                </ul>
-                            {{/notEquals}}
-						</div>
-						<!-- /store top filter -->
-
-						<!-- store products -->
-						<div class="row">
-                            {{#each data.products}}
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-                                <a href="/san-pham/{{this.category}}-{{this.id}}">
-								<div class="product">
-									<div class="product-img">
-										<img src="{{this.image}}" alt="">
-                                        {{#if this.labels}}
-										<div class="product-label">
-                                            {{#each this.labels}}
-                                                <span class="{{this.tagClass}}">{{this.title}}</span>
-                                            {{/each}}
-										</div>
-                                        {{/if}}
+				<!-- store products -->
+				<div class="row">
+					{{#each data.products}}
+					<!-- product -->
+					<div class="col-md-4 col-xs-6">
+						<a href="/san-pham/{{this.category}}-{{this.id}}">
+							<div class="product">
+								<div class="product-img">
+									<img src="{{this.image}}" alt="">
+									{{#if this.labels}}
+									<div class="product-label">
+										{{#each this.labels}}
+										<span class="{{this.tagClass}}">{{this.title}}</span>
+										{{/each}}
 									</div>
-									<div class="product-body">
-										<p class="product-category">{{this.categoryName}}</p>
-										<h3 class="product-name">{{this.name}}</h3>
-										<h4 class="product-price">
-                                            {{this.price}}
-                                            {{#if this.oldPrice}}
-                                            <del class="product-old-price">{{this.oldPrice}}</del>
-                                            {{/if}}
-                                        </h4>
-										<div class="product-rating">
-                                            {{#each this.starRate}}
-                                                <i class="fa fa-star"></i>
-                                            {{/each}}
-										</div>
-									</div>
-									<div class="add-to-cart">
-                                        <a id="anchor_product_{{this.id}}"  href="javascript:add_to_cart({{this.id}});">
-                                            <button type="button" id="button_product_{{this.id}}" class="add-to-cart-btn">
-                                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-                                        </a>
+									{{/if}}
+								</div>
+								<div class="product-body">
+									<p class="product-category">{{this.categoryName}}</p>
+									<h3 class="product-name">{{this.name}}</h3>
+									<h4 class="product-price">
+										{{this.price}}
+										{{#if this.oldPrice}}
+										<del class="product-old-price">{{this.oldPrice}}</del>
+										{{/if}}
+									</h4>
+									<div class="product-rating">
+										{{#each this.starRate}}
+										<i class="fa fa-star"></i>
+										{{/each}}
 									</div>
 								</div>
-                                </a>
+								<div class="add-to-cart">
+									<a id="anchor_product_{{this.id}}" href="javascript:add_to_cart({{this.id}});">
+										<button type="button" id="button_product_{{this.id}}" class="add-to-cart-btn">
+											<i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+									</a>
+								</div>
 							</div>
-							<!-- /product -->
-
-							<div class="clearfix visible-sm visible-xs"></div>
-
-                            {{/each}}
-						</div>
-						<!-- /store products -->
-
-						<!-- store bottom filter -->
-                        {{#notEquals data.pageCount 1}}
-						<div class="store-filter clearfix">
-                            <span class="store-qty">Tổng trang {{data.pageCount}}</span>
-							<ul class="store-pagination">
-
-                                {{#paginate pagination type="previous"}}
-                                    {{#if disabled}}
-                                    {{else}}
-                                    <li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-left"></i></a></li>
-                                    {{/if}}
-                                    {{/paginate}}
-
-                                {{#paginate pagination type="middle" limit = "5"}}
-                                    {{#if active}}
-                                    <li class="active">{{n}}</li>
-                                    {{else}}
-                                    <li><a href="javascript:onParameterChanged('page','{{n}}')">{{n}}</a></li>
-                                    {{/if}}
-                                {{/paginate}}
-                                {{#paginate pagination type="next"}}
-                                    <li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-right"></i></a></li>
-                                {{/paginate}}
-						</ul>
-						</div>
-                        {{/notEquals}}
-						<!-- /store bottom filter -->
+						</a>
 					</div>
-					<!-- /STORE -->
+					<!-- /product -->
+
+					<div class="clearfix visible-sm visible-xs"></div>
+
+					{{/each}}
 				</div>
-				<!-- /row -->
+				<!-- /store products -->
+
+				<!-- store bottom filter -->
+				{{#notEquals data.pageCount 1}}
+				<div class="store-filter clearfix">
+					<span class="store-qty">Tổng trang {{data.pageCount}}</span>
+					<ul class="store-pagination">
+
+						{{#paginate pagination type="previous"}}
+						{{#if disabled}}
+						{{else}}
+						<li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-left"></i></a>
+						</li>
+						{{/if}}
+						{{/paginate}}
+
+						{{#paginate pagination type="middle" limit = "5"}}
+						{{#if active}}
+						<li class="active">{{n}}</li>
+						{{else}}
+						<li><a href="javascript:onParameterChanged('page','{{n}}')">{{n}}</a></li>
+						{{/if}}
+						{{/paginate}}
+						{{#paginate pagination type="next"}}
+						<li><a href="javascript:onParameterChanged('page','{{n}}')"><i
+									class="fa fa-angle-right"></i></a></li>
+						{{/paginate}}
+					</ul>
+				</div>
+				{{/notEquals}}
+				<!-- /store bottom filter -->
 			</div>
-			<!-- /container -->
+			<!-- /STORE -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
 </div>
 <!-- /SECTION -->
 <script>

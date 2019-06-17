@@ -24,6 +24,37 @@ exports.search_by_category_and_name = async(category, search) => {
     const result = {};
     return await dbs.production.collection(PRODUCTS).find(query).toArray();
 };
+
+exports.search_detail = async(category,brand,price_min,price_max, search, page, pageSize,order) => {
+    const query = {};
+
+    if(category&&category!=='all') query.category = category;
+    if(brand&&brand!=='all') query.brand = brand;
+    // if(price_min) query.price = {$gte: +price_min};
+    // if(price_max) query.price = {$lt: +price_max};
+
+    if(search) query.name = {$regex: search, $options: "$i"};
+
+    const result = {};
+    result.page = page;
+    result.pageSize = pageSize;
+    result.size =  await dbs.production.collection(PRODUCTS).find(query).count();
+
+    // init sort
+    let sort;
+    switch (order) {
+        case 'nameasc': sort = {name : 1};break;
+        case 'namedesc': sort = {name: -1}; break;
+        case 'newest':sort ={_id:1};break;
+        case 'eldest':sort={_id:-1};break;
+       // case 'priceasc' : sort ={price: 1};break;
+      //  case 'pricedesc' :sort ={price :-1};break;
+    }
+
+    result.products = await dbs.production.collection(PRODUCTS).find(query).sort(sort).skip((pageSize*page)-pageSize).limit(pageSize).toArray();
+    return result;
+};
+
 exports.search = async(category, search, page, pageSize,order) => {
     const query = {};
 

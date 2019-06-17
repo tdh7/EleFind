@@ -12,6 +12,9 @@ const fs = require('fs');
 exports.home = async function(req, res, next) {
     let search = req.query.timkiem;
     let category = req.query.danhmuc;
+    let brand=req.query.brand;
+    let price_min=req.query.price_min;
+    let price_max=req.query.price_max;
 
     let pageSize = Number.parseInt(req.query.pagesize);
     if(!pageSize) pageSize = 20;
@@ -26,9 +29,12 @@ exports.home = async function(req, res, next) {
 
     data.search = search;
     data.category = category;
+    data.price_min = price_min;
+    data.price_max = price_max;
+    data.brand = brand;
     data.page = page;
     data.pagesize = pageSize;
-    const result = await product.search(category,search,page,pageSize,order);
+    const result = await product.search_detail(category,brand,price_min,price_max,search,page,pageSize,order);
     data.products = result.products;
     data.size = result.size;
     data.order = order;
