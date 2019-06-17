@@ -274,7 +274,7 @@ function add_to_cart(product_id) {
 			console.log(res);
 			if(!res.isSignIn) {
 				alert("Đăng nhập đã nhé ^^");
-				window.location.href = '/dang-nhap/';
+				window.location.href = '/dang-nhap?redirect='+window.location.pathname;
 			}
 			else if(res.result==='added') $('#anchor_product_'+product_id).html(cartAnchor(product_id));
 			else if(res.result==='removed') $('#anchor_product_'+product_id).html(removeAnchor(product_id));
