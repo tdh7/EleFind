@@ -7,6 +7,8 @@ const userModel = require('../models/user');
 const passport = require('passport');
 const Util = require('../helpers/util');
 
+
+
 exports.parseWebsite = async (req,res,next) => {
 
     const data = [];
@@ -91,6 +93,7 @@ exports.data_receiver = async () => {
     const data = {};
     data.productList = [];
     data.brandList = [];
+    data.reviews = [];
     await exports.get_data_from_tiki(data,'https://tiki.vn/dien-thoai-smartphone/c1795',1,'smartphone','Điện thoại',300);
     await exports.get_data_from_tiki(data,'https://tiki.vn/may-tinh-bang/c1794',0,'tablet','Máy tính bảng',300);
     await exports.get_data_from_tiki(data,'https://tiki.vn/laptop/c8095',0,'laptop','Máy tính xách tay',300);
@@ -99,6 +102,7 @@ exports.data_receiver = async () => {
     await exports.get_data_from_tiki(data,'https://tiki.vn/ban-phim/c1830',0,'accessory','Phụ kiện',300);
 
     await product.update_data_to_collection('tempProduct',data.productList);
+    await product.override_data_to_collection('reviews',data.reviews);
 
     for(let i = 0; i<data.brandList.length;i++) {
         data.brandList[i] = {
@@ -124,12 +128,12 @@ exports.parse_detail_product_old = async (product, url) => {
     product.images = [];
     for(let i=0;i<imageTags.length;i++) {
         const image = imageTags[i].attribs['src'];
-        product.images[i].push(image);
+        product.images.push(image);
     }
     let result;
 };
 
-exports.parse_detail_product = async (product, url) => {
+exports.parse_detail_product = async (data, product, url) => {
     const html = await rp(url);
 
     // get image list
@@ -151,10 +155,9 @@ exports.parse_detail_product = async (product, url) => {
     product.description = detail;
 
     // review list, review detail
-  //  const reviewList = $('.review-list',html);
-  //  const reviewDetail = $('.review-list .review_detail',html);
-  //  product.reviewDetail
-
+    const reviewJson = await rp('https://tiki.vn/api/v2/reviews?product_id='+product.id+'&limit=30');
+    const review = JSON.parse(reviewJson);
+    data.reviews.push(...review.data);
 };
 
 exports.get_data_from_tiki = async (data,base,pageCount,category,categoryName,imageSize) => {
@@ -193,7 +196,7 @@ exports.get_data_from_tiki = async (data,base,pageCount,category,categoryName,im
 
                 try {
                 const href = $('a',list[i])[0].attribs['href'];
-                    await exports.parse_detail_product(item,href);
+                    await exports.parse_detail_product(data,item,href);
                 } catch (e) {
                     console.log('false to get image list : '+ item.name);
 

@@ -2,6 +2,12 @@ const product = require('../models/product');
 const categoriesDb = require('../models/category');
 const brandsDb = require('../models/brand');
 const Util = require('../helpers/util');
+// Get a Handlebars instance
+const hb = require("handlebars");
+const helpers = require('../helpers/handlebars');
+helpers.register(hb);
+// Load a template
+const fs = require('fs');
 
 exports.home = async function(req, res, next) {
     let search = req.query.timkiem;
@@ -47,7 +53,9 @@ exports.home = async function(req, res, next) {
 exports.product_detail = async (req,res,next) => {
   var category = req.params.category;
   var productId = req.params.productId;
-
+  var review_page = Number.parseInt(req.query.rvpage);
+  if(!review_page) review_page = 1;
+  const review_per_page = Number.parseInt(req.query.limit) | 5;
     const data = {
         product
     };
@@ -60,10 +68,89 @@ exports.product_detail = async (req,res,next) => {
     if(result) {
         data.product = result;
         if(data.product.image) data.product.image = Util.getOriginalImages(data.product.image);
-        res.render('product/detail', {title: 'Elefind - Danh sách sản phẩm', data});
+
+        // get reviews;
+        const review_data = await product.all_reviews(Number.parseInt(data.product.id));
+
+        data.product.review = {
+            stars : {
+                "1": {
+                    count: 0,
+                    percent: 0
+                },
+                "2": {
+                    count: 0,
+                    percent: 0
+                },
+                "3": {
+                    count: 0,
+                    percent: 0
+                },
+                "4": {
+                    count: 0,
+                    percent: 0
+                },
+                "5": {
+                    count: 0,
+                    percent: 0
+                },
+            },
+            rating_average:0,
+            review_count : review_data.length,
+        };
+        let sum = 0;
+
+        for(let i =0;i<review_data.length;i++) {
+            data.product.review.stars[''+review_data[i].rating].count++;
+            sum +=review_data[i].rating;
+        }
+        for(let i=1;i<=5;i++) {
+            data.product.review.stars[''+i].percent =  Math.round(data.product.review.stars[''+i].count/data.product.review.review_count *100);
+        }
+
+        data.product.review.rating_average = Math.round(10*sum/review_data.length)/10;
+        data.product.review.data = Util.paginate(review_data,review_per_page,review_page);
+
+        data.reviewPageCount = Math.ceil(review_data.length / review_per_page);
+        const pagination = {
+            page: review_page,       // The current page the user is on
+            pageCount: data.reviewPageCount  // The total number of available pages
+        };
+
+        res.render('product/detail', {title: 'Elefind - Danh sách sản phẩm', data,pagination});
     } else {
         res.render('error', { customStyleSheet:'stylesheets/error.css' });
     }
 
+};
+
+exports.get_review = async (req,res,next) => {
+    var category = req.params.category;
+    var productId = req.params.productId;
+    var review_page = Number.parseInt(req.query.rvpage);
+    if(!review_page) review_page = 1;
+    const review_per_page = Number.parseInt(req.query.limit) | 5;
+
+    const json = {};
+    const data = {};
+    data.product = {};
+
+    const review_data = await product.all_reviews(Number.parseInt(productId));
+    data.product.review = {};
+    data.product.review.data = Util.paginate(review_data,review_per_page,review_page);
+
+    data.reviewPageCount = Math.ceil(review_data.length / review_per_page);
+    const pagination = {
+        page: review_page,       // The current page the user is on
+        pageCount: data.reviewPageCount  // The total number of available pages
+    };
+    json.data = data;
+    var template = fs.readFileSync('./public/htm/review.html','utf8');
+
+// Compile said template
+    var compiled = hb.compile(template);
+    var html = compiled({data,pagination});
+    res.send(html);
 
 };
+

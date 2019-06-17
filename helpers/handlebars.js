@@ -1,5 +1,11 @@
 const paginate = require('handlebars-paginate');
+const moment = require('moment');
 const util = require('util');
+const year = new Date(new Date().getFullYear().toString()).getTime();
+const DateFormats = {
+    short: "DD MMMM - YYYY",
+    long: "dddd DD.MM HH:mm"
+};
 var register = function(Handlebars) {
     var helpers = {
         'equals' : function(arg1, arg2, options) {
@@ -38,7 +44,19 @@ var register = function(Handlebars) {
                 }
             }
             return Handlebars.SafeString(output);
-        }
+        },
+        "formatDate":function(datetime, format) {
+            datetime= Number.parseInt(datetime);
+                if (moment) {
+                    // can use other formats like 'lll' too
+                    format = DateFormats[format] || format;
+                    const datep = moment(datetime).format(format);
+                    return datep;
+                }
+                else {
+                    return datetime;
+                }
+            }
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

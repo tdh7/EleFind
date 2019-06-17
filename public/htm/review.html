@@ -1,0 +1,47 @@
+<ul class="reviews">
+    {{#each data.product.review.data}}
+    <li>
+        <div class="review-heading">
+            <h5 class="name">{{this.created_by.name}}</h5>
+            <p class="date">{{formatDate this.created_at 'long'}} - {{ this.created_at}}</p>
+            <div class="review-rating">
+                {{#each this.rating}}
+                <i class="fa fa-star"></i>
+                {{/each}}
+                {{#each (5-this.rating)}}
+                <i class="fa fa-star-o empty"></i>
+                {{/each}}
+
+            </div>
+        </div>
+        <div class="review-body">
+            <p>{{this.content}}</p>
+        </div>
+    </li>
+    {{/each}}
+</ul>
+{{#notEquals pagination.pageCount 1}}
+<ul class="reviews-pagination">
+    {{#paginate pagination type="previous"}}
+    {{#if disabled}}
+    {{else}}
+    <li><a href="javascript:load_review({{n}})"><i class="fa fa-angle-left"></i></a></li>
+    {{/if}}
+    {{/paginate}}
+
+    {{#paginate pagination type="middle" limit = "5"}}
+    {{#if active}}
+    <li class="active">{{n}}</li>
+    {{else}}
+    <li><a href="javascript:load_review({{n}})">{{n}}</a></li>
+    {{/if}}
+    {{/paginate}}
+    {{#paginate pagination type="next"}}
+    {{#if disabled}}
+    {{else}}
+    <li><a href="javascript:load_review({{n}})"><i class="fa fa-angle-right"></i></a></li>
+    {{/if}}
+    {{/paginate}}
+</ul>
+</div>
+{{/notEquals}}
