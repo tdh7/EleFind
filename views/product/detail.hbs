@@ -1,480 +1,416 @@
 <!-- SECTION -->
 <div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row" id="#section">
-					<!-- Product main img -->
-					<div class="col-md-5 col-md-push-2">
-						<div id="product-main-img">
-                            {{#if data.product.images }}
-                                {{#each data.product.images }}
-                                    <div class="product-preview">
-                                        <img src="{{#originalImage}}{{this}}{{/originalImage}}" alt="">
-                                    </div>
-                                {{/each}}
-                            {{else}};
-                                <div class="product-preview">
-                                    <img src="{{data.product.image}}" alt="">
-                                </div>
-                            {{/if}}
-						</div>
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row" id="#section">
+			<!-- Product main img -->
+			<div class="col-md-5 col-md-push-2">
+				<div id="product-main-img">
+					{{#if data.product.images }}
+					{{#each data.product.images }}
+					<div class="product-preview">
+						<img src="{{#originalImage}}{{this}}{{/originalImage}}" alt="">
 					</div>
-					<!-- /Product main img -->
+					{{/each}}
+					{{else}};
+					<div class="product-preview">
+						<img src="{{data.product.image}}" alt="">
+					</div>
+					{{/if}}
+				</div>
+			</div>
+			<!-- /Product main img -->
 
-					<!-- Product thumb imgs -->
-					<div class="col-md-2  col-md-pull-5">
-						<div id="product-imgs">
-                            {{#if data.product.images }}
-                            {{#each data.product.images }}
-							<div class="product-preview">
-								<img src="{{#previewImage}}{{this}}{{/previewImage}}" alt="">
+			<!-- Product thumb imgs -->
+			<div class="col-md-2  col-md-pull-5">
+				<div id="product-imgs">
+					{{#if data.product.images }}
+					{{#each data.product.images }}
+					<div class="product-preview">
+						<img src="{{#previewImage}}{{this}}{{/previewImage}}" alt="">
+					</div>
+					{{/each}}
+					{{else}};
+					<div class="product-preview">
+						<img src="{{data.product.image}}" alt="">
+					</div>
+					{{/if}}
+				</div>
+			</div>
+			<!-- /Product thumb imgs -->
+
+			<!-- Product details -->
+			<div class="col-md-5">
+				<div class="product-details">
+					<h2 class="product-name">{{data.product.name}}</h2>
+					<div>
+						<div class="product-rating">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+						</div>
+
+						<a class="review-link" href="#">{{#if data.product.comment_count}}
+							{{data.product.comment_count}} {{else}} 0 {{/if}} Nhận xét(s) | Thêm nhận xét</a>
+					</div>
+					<div>
+						<h3 class="product-price">{{data.product.price}}
+							{{#if data.product.oldPrice}}
+							<del class="product-old-price">{{data.product.oldPrice}}</del></h3>
+						{{/if}}
+						<span class="product-available">
+							{{#if data.product.out_of_product}}
+							Hết hàng
+							{{else}}
+							Còn hàng
+							{{/if}}
+						</span>
+					</div>
+					<p>
+						<!--data.product.description-->
+					</p>
+
+					<div class="product-options">
+						<label>
+							Kích thước
+							<select class="input-select">
+								<option value="0">13in</option>
+								<option value="0">14in</option>
+								<option value="0">15in</option>
+							</select>
+						</label>
+						<label>
+							Màu
+							<select class="input-select">
+								<option value="0">Đỏ</option>
+								<option value="0">Vàng</option>
+								<option value="0">Xanh</option>
+							</select>
+						</label>
+					</div>
+
+					<div class="add-to-cart">
+						<div class="qty-label">
+							Số lượng
+							<div class="input-number">
+								<input type="number">
+								<span class="qty-up">+</span>
+								<span class="qty-down">-</span>
 							</div>
-                            {{/each}}
-                            {{else}};
-                                <div class="product-preview">
-                                    <img src="{{data.product.image}}" alt="">
-                                </div>
-                            {{/if}}
 						</div>
+						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
 					</div>
-					<!-- /Product thumb imgs -->
 
-					<!-- Product details -->
-					<div class="col-md-5">
-						<div class="product-details">
-							<h2 class="product-name">{{data.product.name}}</h2>
-							<div>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
+					<ul class="product-btns">
+						<li><a href="#"><i class="fa fa-heart-o"></i> Thêm vào danh sách muốn chọn</a></li>
+						<li><a href="#"><i class="fa fa-exchange"></i> Thêm để so sánh</a></li>
+					</ul>
+
+					<ul class="product-links">
+						<li>Danh mục:</li>
+						<li><a href="#">Tai nghe</a></li>
+						<li><a href="#">Phụ kiện</a></li>
+					</ul>
+
+					<ul class="product-links">
+						<li>Chia sẻ:</li>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+
+				</div>
+			</div>
+			<!-- /Product details -->
+
+			<!-- Product tab -->
+			<div class="col-md-12">
+				<div id="product-tab">
+					<!-- product tab nav -->
+					<ul class="tab-nav">
+						<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+						<!--<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>-->
+						<li><a data-toggle="tab" href="#tab2">Nhận xét ({{data.product.review.review_count}})</a></li>
+					</ul>
+					<!-- /product tab nav -->
+
+					<!-- product tab content -->
+					<div class="tab-content">
+						<!-- tab1  -->
+						<div id="tab1" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-md-12">
+									{{{data.product.description}}}
 								</div>
-
-								<a class="review-link" href="#">{{#if data.product.comment_count}} {{data.product.comment_count}} {{else}} 0 {{/if}} Nhận xét(s) | Thêm nhận xét</a>
 							</div>
-							<div>
-								<h3 class="product-price">{{data.product.price}}
-                                    {{#if data.product.oldPrice}}
-                                        <del class="product-old-price">{{data.product.oldPrice}}</del></h3>
-                                    {{/if}}
-								<span class="product-available">
-                                    {{#if data.product.out_of_product}}
-                                        Hết hàng
-                                    {{else}}
-                                        Còn hàng
-                                    {{/if}}
-                                </span>
-							</div>
-							<p><!--data.product.description-->
-                            </p>
-
-							<div class="product-options">
-								<label>
-									Kích thước
-									<select class="input-select">
-										<option value="0">13in</option>
-										<option value="0">14in</option>
-										<option value="0">15in</option>
-									</select>
-								</label>
-								<label>
-									Màu
-									<select class="input-select">
-										<option value="0">Đỏ</option>
-										<option value="0">Vàng</option>
-										<option value="0">Xanh</option>
-									</select>
-								</label>
-							</div>
-
-							<div class="add-to-cart">
-								<div class="qty-label">
-									Số lượng
-									<div class="input-number">
-										<input type="number">
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
-									</div>
-								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
-							</div>
-
-							<ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> Thêm vào danh sách muốn chọn</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> Thêm để so sánh</a></li>
-							</ul>
-
-							<ul class="product-links">
-								<li>Danh mục:</li>
-								<li><a href="#">Tai nghe</a></li>
-								<li><a href="#">Phụ kiện</a></li>
-							</ul>
-
-							<ul class="product-links">
-								<li>Chia sẻ:</li>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							</ul>
-
 						</div>
-					</div>
-					<!-- /Product details -->
-
-					<!-- Product tab -->
-					<div class="col-md-12">
-						<div id="product-tab">
-							<!-- product tab nav -->
-							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-								<!--<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>-->
-								<li><a data-toggle="tab" href="#tab2">Nhận xét ({{data.product.review.review_count}})</a></li>
-							</ul>
-							<!-- /product tab nav -->
-
-							<!-- product tab content -->
-							<div class="tab-content">
-								<!-- tab1  -->
-								<div id="tab1" class="tab-pane fade in active">
-									<div class="row">
-										<div class="col-md-12">
-                                            {{{data.product.description}}}
+						<!-- /tab1  -->
+						<!-- tab3  -->
+						<div id="tab2" class="tab-pane fade in">
+							<div class="row">
+								<!-- Rating -->
+								<div class="col-md-3">
+									<div id="rating">
+										<div class="rating-avg">
+											<span>{{data.product.review.rating_average}}</span>
+											<div class="rating-stars">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-o"></i>
+											</div>
 										</div>
+										<ul class="rating">
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: {{data.product.review.stars.5.percent}}%;"></div>
+												</div>
+												<span class="sum">{{data.product.review.stars.5.count}}</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: {{data.product.review.stars.4.percent}}%;"></div>
+												</div>
+												<span class="sum">{{data.product.review.stars.4.count}}</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: {{data.product.review.stars.3.percent}}%;"></div>
+												</div>
+												<span class="sum">{{data.product.review.stars.3.count}}</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: {{data.product.review.stars.2.percent}}%;"></div>
+												</div>
+												<span class="sum">{{data.product.review.stars.2.count}}</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: {{data.product.review.stars.1.percent}}%;"></div>
+												</div>
+												<span class="sum">{{data.product.review.stars.1.count}}</span>
+											</li>
+										</ul>
 									</div>
 								</div>
-								<!-- /tab1  -->
-								<!-- tab3  -->
-								<div id="tab2" class="tab-pane fade in">
-									<div class="row">
-										<!-- Rating -->
-										<div class="col-md-3">
-											<div id="rating">
-												<div class="rating-avg">
-													<span>{{data.product.review.rating_average}}</span>
-													<div class="rating-stars">
+								<!-- /Rating -->
+
+								<!-- Reviews -->
+								<div class="col-md-6">
+									<div id="reviews">
+										<ul class="reviews" id="review-panel">
+											{{#each data.product.review.data}}
+											<li>
+												<div class="review-heading">
+													<h5 class="name">{{this.created_by.name}}</h5>
+													<p class="date">{{formatDate this.created_at 'long'}} -
+														{{ this.created_at}}</p>
+													<div class="review-rating">
+														{{#each this.rating}}
 														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
+														{{/each}}
+														{{#each (5-this.rating)}}
+														<i class="fa fa-star-o empty"></i>
+														{{/each}}
+
 													</div>
 												</div>
-												<ul class="rating">
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: {{data.product.review.stars.5.percent}}%;"></div>
-														</div>
-														<span class="sum">{{data.product.review.stars.5.count}}</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: {{data.product.review.stars.4.percent}}%;"></div>
-														</div>
-														<span class="sum">{{data.product.review.stars.4.count}}</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-                                                            <div style="width: {{data.product.review.stars.3.percent}}%;"></div>
-														</div>
-                                                        <span class="sum">{{data.product.review.stars.3.count}}</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: {{data.product.review.stars.2.percent}}%;"></div>
-														</div>
-														<span class="sum">{{data.product.review.stars.2.count}}</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-                                                            <div style="width: {{data.product.review.stars.1.percent}}%;"></div>
-														</div>
-														<span class="sum">{{data.product.review.stars.1.count}}</span>
-													</li>
-												</ul>
-											</div>
-										</div>
-										<!-- /Rating -->
+												<div class="review-body">
+													<p>{{this.content}}</p>
+												</div>
+											</li>
+											{{/each}}
+										</ul>
+										{{#notEquals pagination.pageCount 1}}
+										<ul class="reviews-pagination">
+											{{#paginate pagination type="previous"}}
+											{{#if disabled}}
+											{{else}}
+											<li><a href="javascript:load_review({{n}})"><i
+														class="fa fa-angle-left"></i></a></li>
+											{{/if}}
+											{{/paginate}}
 
-										<!-- Reviews -->
-										<div class="col-md-6">
-											<div id="reviews">
-												<ul class="reviews" id="review-panel">
-                                                    {{#each data.product.review.data}}
-													<li>
-														<div class="review-heading">
-															<h5 class="name">{{this.created_by.name}}</h5>
-															<p class="date">{{formatDate this.created_at 'long'}} - {{ this.created_at}}</p>
-															<div class="review-rating">
-                                                                {{#each this.rating}}
-																<i class="fa fa-star"></i>
-                                                                {{/each}}
-                                                                {{#each (5-this.rating)}}
-                                                                    <i class="fa fa-star-o empty"></i>
-                                                                {{/each}}
-
-															</div>
-														</div>
-														<div class="review-body">
-															<p>{{this.content}}</p>
-														</div>
-													</li>
-                                                    {{/each}}
-												</ul>
-                                                {{#notEquals pagination.pageCount 1}}
-                                                        <ul class="reviews-pagination">
-                                                            {{#paginate pagination type="previous"}}
-                                                                {{#if disabled}}
-                                                                {{else}}
-                                                                    <li><a href="javascript:load_review({{n}})"><i class="fa fa-angle-left"></i></a></li>
-                                                                {{/if}}
-                                                            {{/paginate}}
-
-                                                            {{#paginate pagination type="middle" limit = "5"}}
-                                                                {{#if active}}
-                                                                    <li class="active">{{n}}</li>
-                                                                {{else}}
-                                                                    <li><a href="javascript:load_review({{n}})">{{n}}</a></li>
-                                                                {{/if}}
-                                                            {{/paginate}}
-                                                            {{#paginate pagination type="next"}}
-                                                                <li><a href="javascript:load_review({{n}})"><i class="fa fa-angle-right"></i></a></li>
-                                                            {{/paginate}}
-                                                        </ul>
-                                                    </div>
-                                                {{/notEquals}}
-											</div>
-										</div>
-										<!-- /Reviews -->
-
-										<!-- Review Form -->
-										<div class="col-md-3">
-											<div id="review-form">
-												<form class="review-form">
-													<input class="input" type="text" placeholder="Tên của bạn">
-													<input class="input" type="email" placeholder="Địa chỉ mail">
-													<textarea class="input" placeholder="Viết nhận xét..."></textarea>
-													<div class="input-rating">
-														<span>Đánh giá: </span>
-														<div class="stars">
-															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-														</div>
-													</div>
-													<button class="primary-btn">Gửi</button>
-												</form>
-											</div>
-										</div>
-										<!-- /Review Form -->
+											{{#paginate pagination type="middle" limit = "5"}}
+											{{#if active}}
+											<li class="active">{{n}}</li>
+											{{else}}
+											<li><a href="javascript:load_review({{n}})">{{n}}</a></li>
+											{{/if}}
+											{{/paginate}}
+											{{#paginate pagination type="next"}}
+											<li><a href="javascript:load_review({{n}})"><i
+														class="fa fa-angle-right"></i></a></li>
+											{{/paginate}}
+										</ul>
 									</div>
+									{{/notEquals}}
 								</div>
-								<!-- /tab3  -->
 							</div>
-							<!-- /product tab content  -->
+							<!-- /Reviews -->
+
+							<!-- Review Form -->
+							<div class="col-md-3">
+								<div id="review-form">
+									<form class="review-form">
+										<input class="input" type="text" placeholder="Tên của bạn">
+										<input class="input" type="email" placeholder="Địa chỉ mail">
+										<textarea class="input" placeholder="Viết nhận xét..."></textarea>
+										<div class="input-rating">
+											<span>Đánh giá: </span>
+											<div class="stars">
+												<input id="star5" name="rating" value="5" type="radio"><label
+													for="star5"></label>
+												<input id="star4" name="rating" value="4" type="radio"><label
+													for="star4"></label>
+												<input id="star3" name="rating" value="3" type="radio"><label
+													for="star3"></label>
+												<input id="star2" name="rating" value="2" type="radio"><label
+													for="star2"></label>
+												<input id="star1" name="rating" value="1" type="radio"><label
+													for="star1"></label>
+											</div>
+										</div>
+										<button class="primary-btn">Gửi</button>
+									</form>
+								</div>
+							</div>
+							<!-- /Review Form -->
 						</div>
 					</div>
-					<!-- /product tab -->
+					<!-- /tab3  -->
 				</div>
-				<!-- /row -->
+				<!-- /product tab content  -->
 			</div>
-			<!-- /container -->
+		</div>
+		<!-- /product tab -->
+	</div>
+	<!-- /row -->
+</div>
+<!-- /container -->
 </div>
 <!-- /SECTION -->
 <!-- Section -->
 <div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
 
-					<div class="col-md-12">
-						<div class="section-title text-center">
-							<h3 class="title">Sản phẩm liên quan</h3>
-						</div>
-					</div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="/images/product01.png" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Tên danh mục</p>
-								<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view" onclick="window.location.href = '/xem-chi-tiet'"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="/images/product02.png" alt="">
-								<div class="product-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Tên danh mục</p>
-								<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view" onclick="window.location.href = '/xem-chi-tiet'"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="/images/product03.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Tên danh mục</p>
-								<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view" onclick="window.location.href = '/xem-chi-tiet'"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-                                <a id="anchor_product_{{data.product.id}}"  href="javascript:add_to_cart({{data.product.id}});">
-                                    <button type="button" id="button_product_{{data.product.id}}" class="add-to-cart-btn">
-                                        <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-                                </a>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="/images/product04.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Tên danh mục</p>
-								<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view" onclick="window.location.href = '/xem-chi-tiet'"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
+			<div class="col-md-12">
+				<div class="section-title text-center">
+					<h3 class="title">Sản phẩm liên quan</h3>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
+
+			<div class="row">
+				{{#each data.dm}}
+				<!-- product -->
+				<div class="col-md-4 col-xs-6">
+					<a href="/san-pham/{{this.category}}-{{this.id}}">
+						<div class="product">
+							<div class="product-img">
+								<img src="{{this.image}}" alt="">
+								{{#if this.labels}}
+								<div class="product-label">
+									{{#each this.labels}}
+									<span class="{{this.tagClass}}">{{this.title}}</span>
+									{{/each}}
+								</div>
+								{{/if}}
+							</div>
+							<div class="product-body">
+								<p class="product-category">{{this.categoryName}}</p>
+								<h3 class="product-name">{{this.name}}</h3>
+								<h4 class="product-price">
+									{{this.price}}
+									{{#if this.oldPrice}}
+									<del class="product-old-price">{{this.oldPrice}}</del>
+									{{/if}}
+								</h4>
+								<div class="product-rating">
+									{{#each this.starRate}}
+									<i class="fa fa-star"></i>
+									{{/each}}
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<a id="anchor_product_{{this.id}}" href="javascript:add_to_cart({{this.id}});">
+									<button type="button" id="button_product_{{this.id}}" class="add-to-cart-btn">
+										<i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+								</a>
+							</div>
+						</div>
+					</a>
+				</div>
+				<!-- /product -->
+
+				{{!-- <div class="clearfix visible-sm visible-xs"></div> --}}
+
+				{{/each}}
+			</div>
+
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
 </div>
 <!-- /Section -->
 <script>
 
-    function load_review(page) {
-        $.ajax({
-            type: 'GET',
-            url: "/san-pham/smartphone-{{data.product.id}}/review?rvpage="+page,
-            success: function(res){
-                console.log(res);
-                 $('#reviews').html(res);
-                document.getElementById("product-tab").scrollIntoView();
-            },
-            error: function(status){
-                alert(status);
-            }
-        })
-    }
+	function load_review(page) {
+		$.ajax({
+			type: 'GET',
+			url: "/san-pham/smartphone-{{data.product.id}}/review?rvpage=" + page,
+			success: function (res) {
+				console.log(res);
+				$('#reviews').html(res);
+				document.getElementById("product-tab").scrollIntoView();
+			},
+			error: function (status) {
+				alert(status);
+			}
+		})
+	}
 </script>
