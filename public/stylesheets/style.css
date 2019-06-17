@@ -1070,11 +1070,13 @@ textarea.input {
   color: #D10024;
   border-color: #D10024;
   padding: 0px 30px 0px 50px;
+  cursor: pointer;
 }
 
 .product .add-to-cart .add-to-cart-btn:hover>i {
   opacity: 1;
   visibility: visible;
+  cursor: pointer;
 }
 
 /*----------------------------*\
@@ -2198,7 +2200,7 @@ textarea.input {
 
 
 
-input {
+/*input {
     -webkit-appearance: textfield;
     background-color: white;
     -webkit-rtl-ordering: logical;
@@ -2208,25 +2210,22 @@ input {
     border-style: inset;
     border-color: initial;
     border-image: initial;
+}*/
+select.input-select {
+  max-width: 160px;
 }
-input, textarea, select, button {
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    margin: 0em;
-    font: 400 13.3333px Arial;
+.input-select option {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
+/*
 button {
     outline: none !important;
     border: none;
     background: transparent;
 }
+*/
 
 

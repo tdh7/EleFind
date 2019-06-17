@@ -27,7 +27,9 @@
     <link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/stylesheets/style.css"/>
-    <link type="text/css" rel="stylesheet" href="{{{customStyleSheet}}}"/>
+    {{#if customStyleSheet }}
+        <link type="text/css" rel="stylesheet" href="{{{customStyleSheet}}}"/>
+    {{/if}}
 
     <link type="text/css" rel="stylesheet" href="/stylesheets/parsley.css"/>
 
@@ -118,9 +120,9 @@
                                 <i class="fa fa-history"></i>
                                 <span>Lịch sử</span>
                                 {{#if data.user.historyOrder}}
-                                {{#notEquals data.user.historyOrder.length 0}}
-                                    <div class="qty">{{data.user.historyOrder.length}}</div>
-                                {{/notEquals}}
+                                    {{#notEquals data.user.historyOrder.length 0}}
+                                        <div class="qty">{{data.user.historyOrder.length}}</div>
+                                    {{/notEquals}}
                                 {{/if}}
                             </a>
                         </div>
@@ -131,9 +133,9 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
                                 {{#if data.user.cart}}
-                                {{#notEquals data.user.cart.length 0}}
-                                    <div class="qty">{{data.user.cart.length}}</div>
-                                {{/notEquals}}
+                                    {{#notEquals data.user.cart.length 0}}
+                                        <div class="qty">{{data.user.cart.length}}</div>
+                                    {{/notEquals}}
                                 {{/if}}
                             </a>
                             <div class="cart-dropdown">
@@ -272,7 +274,7 @@
                             <li><a href="/quan-ly-gio-hang">Xem Giỏ hàng</a></li>
                             <li><a href="/lich-su-mua-hang">Lịch sủ mua hàng</a></li>
                             <li><a href="/web-parser">Web Parser</a></li>
-                            <li><a href="/old-data">Old Data</a></li>
+                            <li><a href="/normalize">Normalize</a></li>
                         </ul>
                     </div>
                 </div>
@@ -320,15 +322,15 @@
 <script src="/javascripts/jquery.zoom.min.js"></script>
 <script src="/javascripts/main.js"></script>
 
-<script src="/javascripts/jquery-3.3.1.min.js"></script>
-<script src="/javascripts/jquery-ui.js"></script>
-<script src="/javascripts/popper.min.js"></script>
-<script src="/javascripts/bootstrap.min.js"></script>
+<!--<script src="/javascripts/jquery-3.3.1.min.js"></script>
+<script src="/javascripts/jquery-ui.js"></script>-->
+<!--<script src="/javascripts/popper.min.js"></script>-->
+<!--<script src="/javascripts/bootstrap.min.js"></script>
 <script src="/javascripts/owl.carousel.min.js"></script>
 <script src="/javascripts/jquery.magnific-popup.min.js"></script>
 <script src="/javascripts/aos.js"></script>
 
-<script src="/javascripts/maincart.js"></script>
+<script src="/javascripts/maincart.js"></script>-->
 <script src="/javascripts/parsley.min.js"></script>
 </body>
 </html>

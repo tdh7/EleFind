@@ -3,25 +3,21 @@
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
-				<div class="row">
+				<div class="row" id="#section">
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
-							<div class="product-preview">
-								<img src="{{data.product.image}}" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product03.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product06.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product08.png" alt="">
-							</div>
+                            {{#if data.product.images }}
+                                {{#each data.product.images }}
+                                    <div class="product-preview">
+                                        <img src="{{#originalImage}}{{this}}{{/originalImage}}" alt="">
+                                    </div>
+                                {{/each}}
+                            {{else}};
+                                <div class="product-preview">
+                                    <img src="{{data.product.image}}" alt="">
+                                </div>
+                            {{/if}}
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -29,21 +25,17 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
+                            {{#if data.product.images }}
+                            {{#each data.product.images }}
 							<div class="product-preview">
-								<img src="{{data.product.image}}" alt="">
+								<img src="{{#previewImage}}{{this}}{{/previewImage}}" alt="">
 							</div>
-
-							<div class="product-preview">
-								<img src="/images/product03.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product06.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="/images/product08.png" alt="">
-							</div>
+                            {{/each}}
+                            {{else}};
+                                <div class="product-preview">
+                                    <img src="{{data.product.image}}" alt="">
+                                </div>
+                            {{/if}}
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
@@ -76,7 +68,7 @@
                                     {{/if}}
                                 </span>
 							</div>
-							<p>{{data.product.description}}
+							<p><!--data.product.description-->
                             </p>
 
 							<div class="product-options">
@@ -139,8 +131,8 @@
 							<!-- product tab nav -->
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-								<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>
-								<li><a data-toggle="tab" href="#tab3">Nhận xét (3)</a></li>
+								<!--<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>-->
+								<li><a data-toggle="tab" href="#tab2">Nhận xét ({{data.product.review.review_count}})</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -150,30 +142,19 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Dell Vostro 5471 i7 thuộc dòng Vostro. Máy tính xách tay được thiết kế tròn ở hai bên và ở phía trước , sau, làm cho máy rất ấn tượng . Ba mặt của Dell Vostro 5471 được làm từ nhôm anodized, cải thiện độ bền của máy tính xách tay. Bên cạnh đó, bề mặt kim loại của máy tính xách tay đã được xử lý bằng công nghệ phun cát nhiều lần, mang lại kết cấu tốt.</p>
+                                            {{{data.product.description}}}
 										</div>
 									</div>
 								</div>
 								<!-- /tab1  -->
-
-								<!-- tab2  -->
-								<div id="tab2" class="tab-pane fade in">
-									<div class="row">
-										<div class="col-md-12">
-											<p>Dell Vostro V5471 i7 có màn hình 14.0-inch FHD IPS (1920 x 1080) Anti-Glare LED-Backlit Display với góc nhìn tuyệt vời. Màn hình có độ tương phản cao và chức năng chống chói. Màn hình hiển thị hình ảnh rõ ràng và tự nhiên. Đối với người dùng văn phòng, Dell Vostro 5471 là một lựa chọn tốt. Chúng tôi đã sử dụng Spyder 5 để kiểm tra không gian màu sắc và hiệu suất màn hình. Về kết quả kiểm tra, chúng ta có thể thấy rằng không gian màu sRGB của màn hình đạt đến 64%, độ sáng của màn hình là 183nits, và NTSC của màn hình đạt đến 45%. Màn hình Vostro 14 5471 tăng cường không gian màu tiêu chuẩn và nó có thể hoàn toàn đáp ứng tốt với công việc văn phòng hàng ngày</p>
-										</div>
-									</div>
-								</div>
-								<!-- /tab2  -->
-
 								<!-- tab3  -->
-								<div id="tab3" class="tab-pane fade in">
+								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<!-- Rating -->
 										<div class="col-md-3">
 											<div id="rating">
 												<div class="rating-avg">
-													<span>4.5</span>
+													<span>{{data.product.review.rating_average}}</span>
 													<div class="rating-stars">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
@@ -192,9 +173,9 @@
 															<i class="fa fa-star"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 80%;"></div>
+															<div style="width: {{data.product.review.stars.5.percent}}%;"></div>
 														</div>
-														<span class="sum">3</span>
+														<span class="sum">{{data.product.review.stars.5.count}}</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -205,9 +186,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 60%;"></div>
+															<div style="width: {{data.product.review.stars.4.percent}}%;"></div>
 														</div>
-														<span class="sum">2</span>
+														<span class="sum">{{data.product.review.stars.4.count}}</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -218,9 +199,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div></div>
+                                                            <div style="width: {{data.product.review.stars.3.percent}}%;"></div>
 														</div>
-														<span class="sum">0</span>
+                                                        <span class="sum">{{data.product.review.stars.3.count}}</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -231,9 +212,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div></div>
+															<div style="width: {{data.product.review.stars.2.percent}}%;"></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum">{{data.product.review.stars.2.count}}</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -244,9 +225,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div></div>
+                                                            <div style="width: {{data.product.review.stars.1.percent}}%;"></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum">{{data.product.review.stars.1.count}}</span>
 													</li>
 												</ul>
 											</div>
@@ -256,63 +237,50 @@
 										<!-- Reviews -->
 										<div class="col-md-6">
 											<div id="reviews">
-												<ul class="reviews">
+												<ul class="reviews" id="review-panel">
+                                                    {{#each data.product.review.data}}
 													<li>
 														<div class="review-heading">
-															<h5 class="name">Hoàng</h5>
-															<p class="date">27/10/2018, 8:00 PM</p>
+															<h5 class="name">{{this.created_by.name}}</h5>
+															<p class="date">{{formatDate this.created_at 'long'}} - {{ this.created_at}}</p>
 															<div class="review-rating">
+                                                                {{#each this.rating}}
 																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
+                                                                {{/each}}
+                                                                {{#each (5-this.rating)}}
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                {{/each}}
+
 															</div>
 														</div>
 														<div class="review-body">
-															<p>Khi nào có khuyến mãi vậy shop?</p>
+															<p>{{this.content}}</p>
 														</div>
 													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">Long</h5>
-															<p class="date">30/10/2018, 9:00 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Máy sử dụng rất tốt</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">Hiền</h5>
-															<p class="date">12/11/2018, 7:00 AM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Máy đẹp, giao hàng nhanh.</p>
-														</div>
-													</li>
+                                                    {{/each}}
 												</ul>
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
+                                                {{#notEquals pagination.pageCount 1}}
+                                                        <ul class="reviews-pagination">
+                                                            {{#paginate pagination type="previous"}}
+                                                                {{#if disabled}}
+                                                                {{else}}
+                                                                    <li><a href="javascript:load_review({{n}})"><i class="fa fa-angle-left"></i></a></li>
+                                                                {{/if}}
+                                                            {{/paginate}}
+
+                                                            {{#paginate pagination type="middle" limit = "5"}}
+                                                                {{#if active}}
+                                                                    <li class="active">{{n}}</li>
+                                                                {{else}}
+                                                                    <li><a href="javascript:load_review({{n}})">{{n}}</a></li>
+                                                                {{/if}}
+                                                            {{/paginate}}
+                                                            {{#paginate pagination type="next"}}
+                                                                <li><a href="javascript:load_review({{n}})"><i class="fa fa-angle-right"></i></a></li>
+                                                            {{/paginate}}
+                                                        </ul>
+                                                    </div>
+                                                {{/notEquals}}
 											</div>
 										</div>
 										<!-- /Reviews -->
@@ -453,7 +421,10 @@
 								</div>
 							</div>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <a id="anchor_product_{{data.product.id}}"  href="javascript:add_to_cart({{data.product.id}});">
+                                    <button type="button" id="button_product_{{data.product.id}}" class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                </a>
 							</div>
 						</div>
 					</div>
@@ -490,3 +461,20 @@
 			<!-- /container -->
 </div>
 <!-- /Section -->
+<script>
+
+    function load_review(page) {
+        $.ajax({
+            type: 'GET',
+            url: "/san-pham/smartphone-{{data.product.id}}/review?rvpage="+page,
+            success: function(res){
+                console.log(res);
+                 $('#reviews').html(res);
+                document.getElementById("product-tab").scrollIntoView();
+            },
+            error: function(status){
+                alert(status);
+            }
+        })
+    }
+</script>

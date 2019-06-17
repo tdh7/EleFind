@@ -2,7 +2,7 @@
 const ObjectId = require('mongodb').ObjectId;
 const { dbs } = require('../dbs');
 
-const PRODUCTS = 'products';
+const PRODUCTS = 'tempProduct';
 
 exports.find_product_by__object_id = async (id) => {
     const results = await dbs.production.collection(PRODUCTS).find({_id: ObjectId(id)})
@@ -80,6 +80,48 @@ exports.all_by_page = async (page,perPage) => {
     return result;
 };
 
+exports.all_reviews = async (productID) => {
+   return  await dbs.production.collection('reviews').find({product_id: productID}).toArray();
+};
+
+exports.get_rating = async (productID) => {
+    const result = {};
+    result.reviews_count = 0;
+    result.stars = {};
+    for(let i = 1;i<=5;i++) {
+            result.stars[''+i].count = 0;
+            result.stars[''+i].percent = 0;
+    }
+
+    for(let i = 1;i<=5;i++) {
+
+    }
+
+
+    result.count = await dbs.production.collection(PRODUCTS).find({}).count();
+    result.page = page;
+    result.perPage = perPage;
+
+    result.data = await (dbs.production
+        .collection(PRODUCTS)
+        .find({})
+        .skip((perPage*page)-perPage).limit(perPage).toArray());
+    return result;
+};
+
+exports.all_reviews_by_page = async (productID,page,perPage) => {
+    const result = {};
+    result.count = await dbs.production.collection('reviews').find({}).count();
+    result.page = page;
+    result.perPage = perPage;
+
+    result.data = (await dbs.production
+        .collection('reviews')
+        .find({product_id:productID})
+        .skip((perPage*page)-perPage).limit(perPage)).toArray();
+    return result;
+};
+
 exports.all_old_product = async () => {
     return await dbs.production.collection('product').find({}).toArray();
 };
@@ -88,11 +130,25 @@ exports.query_by_category = async (category) => {
     return await dbs.production.collection(PRODUCTS).find({category: category}).toArray();
 };
 
-
-
 exports.insertArrayOfDoc = async (data) => {
     console.log('data length :'+data.length);
-     await dbs.production.collection('products').insertMany(data);
+     await dbs.production.collection(PRODUCTS).insertMany(data);
+};
+
+exports.set_data = async (data) => {
+    await dbs.production.collection(PRODUCTS).deleteMany({});
+    await dbs.production.collection(PRODUCTS).insertMany(data);
+};
+exports.override_data_to_collection = async (collection,data) => {
+    if(data.length>0) {
+        await dbs.production.collection(collection).deleteMany({});
+        await dbs.production.collection(collection).insertMany(data);
+    }
+};
+
+exports.update_data_to_collection = async (collection,data) => {
+  for(let i = 0;i<data.length;i++)
+      await dbs.production.collection(collection).update({id:data[i].id},data[i]);
 };
 
 exports.all = all;

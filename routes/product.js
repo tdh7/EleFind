@@ -9,5 +9,6 @@ router.get('/toan-bo-san-pham', productController.home);
 router.get('/', productController.home);
 
 router.get('/:category-:productId', productController.product_detail);
+router.get('/:category-:productId/review',productController.get_review);
 
 module.exports = router;

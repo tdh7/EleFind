@@ -132,8 +132,8 @@
 									</select>
 								</label>
 							</div>
+                            {{#notEquals data.pageCount 1}}
                             <ul class="store-pagination">
-
                                 {{#paginate pagination type="previous"}}
                                     {{#if disabled}}
                                     {{else}}
@@ -152,6 +152,7 @@
                                     <li><a href="javascript:onParameterChanged('page','{{n}}')"><i class="fa fa-angle-right"></i></a></li>
                                 {{/paginate}}
                                 </ul>
+                            {{/notEquals}}
 						</div>
 						<!-- /store top filter -->
 
@@ -188,7 +189,10 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
+                                        <a id="anchor_product_{{this.id}}"  href="javascript:add_to_cart({{this.id}});">
+                                            <button type="button" id="button_product_{{this.id}}" class="add-to-cart-btn">
+                                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                        </a>
 									</div>
 								</div>
                                 </a>

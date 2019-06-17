@@ -58,6 +58,12 @@ exports.addToCart = async (email,productID) => {
 
 	return await dbs.production.collection(USER).save({email: email},{cart : cart});
 };
+exports.save_cart = async (email, cart) => {
+	const user = await exports.get(email);
+	if(!user) return false;
+	user.cart = cart;
+	return await dbs.production.collection(USER).update({email:email},user);
+};
 
 exports.saveUser = async(user) => {
 	if(!user.email) return undefined;

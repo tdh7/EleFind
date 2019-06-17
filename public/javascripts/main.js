@@ -246,3 +246,44 @@ function updateUrl(url,key,value){
 
 	return finalUrl;
 }
+
+function cartAnchor(id) {
+	return " <a  href=\"javascript:add_to_cart(+"+id+");\">\n" +
+		"                                            <button type=\"button\" class=\"add-to-cart-btn\">\n" +
+		"                                            <i class=\"fa fa-shopping-cart\"></i>Bỏ khỏi giỏ</button>\n" +
+		"                                        </a>"
+}
+function removeAnchor(id) {
+	return " <a  href=\"javascript:add_to_cart(+"+id+");\">\n" +
+		"                                            <button type=\"button\" class=\"add-to-cart-btn\">\n" +
+		"                                            <i class=\"fa fa-shopping-cart\"></i>Thêm vào giỏ</button>\n" +
+		"                                        </a>"
+}
+
+
+function add_to_cart(product_id) {
+	console.log('you click add-to-cart on product '+product_id);
+
+	$.ajax({
+		type: 'POST',
+		url: "gio-hang/add_to_cart",
+		data : {
+			product_id:product_id
+		},
+		success: function(res){
+			console.log(res);
+			if(!res.isSignIn) {
+				alert("Đăng nhập đã nhé ^^");
+				window.location.href = '/dang-nhap/';
+			}
+			else if(res.result==='added') $('#anchor_product_'+product_id).html(cartAnchor(product_id));
+			else if(res.result==='removed') $('#anchor_product_'+product_id).html(removeAnchor(product_id));
+
+		},
+		error: function(status){
+			alert('Opp! Đã có lỗi, bạn vui lòng thử lại nhé *.*');
+		}
+	});
+
+
+}
