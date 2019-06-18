@@ -27,6 +27,7 @@ exports.home = async function (req, res, next) {
         products: []
     };
 
+
     data.search = search;
     data.category = category;
     data.price_min = price_min;
